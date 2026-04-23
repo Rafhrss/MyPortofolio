@@ -31,7 +31,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {/* Global Background Animation */}
-        <div className="fixed inset-0 z-[-1] w-full bg-[#060B19]">
+        <div className="fixed inset-0 z-[-1] w-full bg-[#242f47]">
           <ShapeGrid 
             speed={0.15}
             squareSize={40}
@@ -43,9 +43,7 @@ export default function RootLayout({
           />
         </div>
 
-        <div className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200">
-          <NavbarDemo/>
-        </div>
+        <NavbarDemo/>
         {children}
       </body>
     </html>

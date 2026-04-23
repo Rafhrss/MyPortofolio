@@ -21,5 +21,6 @@ npx shadcn@latest add @react-bits/ShapeGrid-TS-TW
 npx shadcn@latest add @aceternity/resizable-navbar-demo
 npm install @tabler/icons-react
 npm install motion
+npm install @tabler/icons-react     = IconBrandGithub, IconBrandInstagram, IconBrandLinkedin
 
 ```

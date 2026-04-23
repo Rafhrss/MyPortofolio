@@ -15,16 +15,20 @@ import { useState } from "react";
 export default function NavbarDemo() {
   const navItems = [
     {
-      name: "Features",
-      link: "#features",
+      name: "Home",
+      link: "#home",
     },
     {
-      name: "Pricing",
-      link: "#pricing",
+      name: "Project",
+      link: "#project",
     },
     {
-      name: "Contact",
-      link: "#contact",
+      name: "Galery",
+      link: "#galery",
+    },
+    {
+      name: "About",
+      link: "#about",
     },
   ];
 
@@ -38,8 +42,7 @@ export default function NavbarDemo() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton variant="secondary">Login</NavbarButton>
-            <NavbarButton variant="primary">Book a call</NavbarButton>
+            <NavbarButton variant="primary">Contact</NavbarButton>
           </div>
         </NavBody>
 
@@ -73,14 +76,7 @@ export default function NavbarDemo() {
                 variant="primary"
                 className="w-full"
               >
-                Login
-              </NavbarButton>
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Book a call
+                Contact
               </NavbarButton>
             </div>
           </MobileNavMenu>
