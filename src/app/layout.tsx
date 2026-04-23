@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import NavbarDemo from "@/components/resizable-navbar-demo";
+import ShapeGrid from "@/components/ShapeGrid";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,25 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {/* Global Background Animation */}
+        <div className="fixed inset-0 z-[-1] w-full bg-[#060B19]">
+          <ShapeGrid 
+            speed={0.15}
+            squareSize={40}
+            direction="diagonal"
+            borderColor="#1E3A8A"
+            hoverFillColor="#1E40AF"
+            shape="square"
+            hoverTrailAmount={0}
+          />
+        </div>
+
+        <div className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200">
+          <NavbarDemo/>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
