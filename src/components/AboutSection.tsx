@@ -8,18 +8,18 @@ export default function AboutSection() {
         className="text-4xl md:text-5xl lg:text-6xl font-black mb-2 uppercase leading-[1.1] tracking-wide text-white drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" 
         style={{ WebkitTextStroke: "1px #0891b2" }}
       >
-        HELLO, I'M
+        HELLO, I&apos;M
       </h2>
       <h1 
         className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 uppercase leading-[1.1] tracking-wide text-white drop-shadow-[0_0_15px_rgba(34,211,238,0.8)]" 
         style={{ WebkitTextStroke: "2px #0891b2" }}
       >
-        ZAIN AHMAD FAHREZI
+        Rafa haris
       </h1>
 
       {/* Paragraph */}
       <p className="text-lg md:text-xl text-slate-300 mb-10 font-mono leading-relaxed text-justify">
-        Saya adalah mahasiswa Teknik Informatika di Universitas Indo Global Mandiri Palembang yang memiliki minat besar dalam pengembangan Full Stack dan teknologi web modern. Saya selalu bersemangat untuk belajar hal baru dan menciptakan solusi digital yang inovatif.
+        Saya adalah mahasiswa Teknik Informatika di Universitas Muhammadiyah Kalimantan Timur yang memiliki minat besar dalam pengembangan Full Stack dan teknologi web modern. Saya selalu bersemangat untuk belajar hal baru dan menciptakan solusi digital yang inovatif.
       </p>
 
       {/* Blockquote */}
