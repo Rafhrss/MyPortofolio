@@ -9,40 +9,69 @@ import {
   IconExternalLink, 
   IconBrandGithub, 
   IconX,
-  IconDownload
+  IconDownload,
+  IconBrandReact,
+  IconBrandNextjs,
+  IconBrandTailwind,
+  IconBrandVite,
+  IconDatabase,
+  IconShieldCheck,
+  IconPencil,
+  IconBrandNodejs,
+  IconBrandFigma,
+  IconBrandGit,
+  IconBrandVscode
 } from '@tabler/icons-react';
+
+// --- Helper for Icons ---
+const getTagIcon = (tag: string, size = 14) => {
+  const t = tag.toLowerCase();
+  if (t.includes('react')) return <IconBrandReact size={size} />;
+  if (t.includes('next.js')) return <IconBrandNextjs size={size} />;
+  if (t.includes('tailwind')) return <IconBrandTailwind size={size} />;
+  if (t.includes('vite')) return <IconBrandVite size={size} />;
+  if (t.includes('node.js') || t.includes('express')) return <IconBrandNodejs size={size} />;
+  if (t.includes('figma')) return <IconBrandFigma size={size} />;
+  if (t.includes('github')) return <IconBrandGithub size={size} />;
+  if (t.includes('git')) return <IconBrandGit size={size} />;
+  if (t.includes('vs code')) return <IconBrandVscode size={size} />;
+  if (t.includes('drizzle') || t.includes('neon') || t.includes('mysql') || t.includes('api')) return <IconDatabase size={size} />;
+  if (t.includes('auth')) return <IconShieldCheck size={size} />;
+  if (t.includes('tip tap')) return <IconPencil size={size} />;
+  return <IconCode size={size} />;
+};
 
 // --- Dummy Data ---
 const projects = [
   {
     id: 1,
-    title: 'Zain Portofolio',
-    description: 'Website portofolio pribadi yang dibangun dengan React, Next.js, dan Tailwind CSS.',
-    fullDescription: 'Website portofolio pribadi dengan desain modern dan elegan. Menggunakan teknologi terbaru seperti Next.js App Router, animasi mulus dari Framer Motion, dan styling dengan Tailwind CSS.',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=60',
-    tags: ['Next.js', 'Tailwind', 'React'],
-    liveDemo: '#',
-    sourceCode: '#'
+    title: 'RafSehat-Klinik',
+    description: 'Website RafSehat-Klinik untuk suatu instansi yang dibangun dengan React, Next.js, Tailwind CSS dan Drizzle.',
+    fullDescription: 'Sistem informasi dan manajemen klinik kesehatan (RafSehat-Klinik) yang dirancang untuk mempermudah operasional instansi kesehatan. Dibangun menggunakan stack modern Next.js, autentikasi aman dengan Better-Auth, dan pengelolaan database menggunakan Drizzle ORM serta Neon.',
+    image: 'rafklinikproject.png',
+    tags: ['Next.js', 'Tailwind', 'React', 'Drizzle', 'Neon', 'Better-Auth'],
+    liveDemo: 'https://rafsehat-klinik.vercel.app/',
+    sourceCode: 'https://github.com/Rafhrss/RafSehat-Klinik'
   },
   {
     id: 2,
-    title: '3D Konek',
-    description: 'RESTful API untuk platform e-commerce dengan fitur otentikasi, manajemen produk, dan transaksi.',
-    fullDescription: 'Sebuah sistem backend berbasis Node.js dan Express yang dirancang untuk platform e-commerce berskala menengah. Mendukung JWT authentication, image upload, dan integrasi payment gateway.',
-    image: 'https://images.unsplash.com/photo-1618477388954-7852f32655cb?w=600&auto=format&fit=crop&q=60',
-    tags: ['Node.js', 'Express', 'MongoDB'],
-    liveDemo: '#',
-    sourceCode: '#'
+    title: "Rafda Syar'i",
+    description: "Platform e-commerce toko gamis syar'i dengan fitur otentikasi, manajemen produk, dan transaksi.",
+    fullDescription: 'Aplikasi web e-commerce khusus untuk penjualan pakaian gamis syar\'i. Dilengkapi dengan antarmuka yang responsif dan elegan, katalog produk yang dinamis, serta alur transaksi yang mudah bagi pelanggan. Dibangun menggunakan React dan Vite.',
+    image: 'rafdasyariproject.png',
+    tags: ['React', 'Tailwind', 'Vite'],
+    liveDemo: 'https://rafdasyari.vercel.app/',
+    sourceCode: 'https://github.com/Rafhrss/Rafda-Store'
   },
   {
     id: 3,
-    title: 'UI Design System',
-    description: 'Merancang komponen UI yang reusable dan konsisten untuk aplikasi web menggunakan Figma.',
-    fullDescription: 'Kumpulan komponen UI komprehensif yang mempermudah developer dan desainer untuk menjaga konsistensi antarmuka pengguna pada berbagai proyek internal perusahaan.',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&auto=format&fit=crop&q=60',
-    tags: ['Figma', 'UI/UX', 'Design System'],
-    liveDemo: '#',
-    sourceCode: '#'
+    title: 'Note Forge',
+    description: 'Website catatan untuk kamu yang pelupa saat bekerja maupun aktifitas.',
+    fullDescription: 'Aplikasi pencatatan (note-taking) cerdas bergaya modern yang memungkinkan pengguna menulis dan mengelola catatan dengan mudah. Mendukung rich-text editor menggunakan Tip Tap, dan fitur autentikasi pengguna secara penuh.',
+    image: 'noteforgeproject.png',
+    tags: ['Next.js', 'Tailwind', 'React', 'Drizzle', 'Neon', 'Better-Auth', 'Tip Tap'],
+    liveDemo: 'https://next-noteforge-auth.vercel.app/',
+    sourceCode: 'https://github.com/Rafhrss/Next-Notes-Auth'
   }
 ];
 
@@ -146,7 +175,7 @@ export default function PortfolioShowcase() {
                 <div 
                   key={project.id}
                   onClick={() => setSelectedProject(project)}
-                  className="bg-[#0A1128]/60 border-2 border-transparent rounded-2xl overflow-hidden cursor-pointer group hover:border-white transition-all duration-300 shadow-lg relative aspect-[4/3]"
+                  className="bg-[#0A1128]/60 border-2 border-transparent rounded-2xl overflow-hidden cursor-pointer group hover:border-white transition-all duration-300 shadow-lg relative aspect-4/3"
                 >
                   <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500 brightness-90 group-hover:brightness-110" />
                 </div>
@@ -208,7 +237,9 @@ export default function PortfolioShowcase() {
                   <div className="flex flex-col gap-3">
                     {stack.items.map((item) => (
                       <div key={item} className="flex items-center gap-3 text-slate-300 bg-[#0F172A]/50 px-4 py-3 rounded-xl border border-slate-800/50 font-medium">
-                        <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+                        <div className="text-cyan-400">
+                          {getTagIcon(item, 20)}
+                        </div>
                         {item}
                       </div>
                     ))}
@@ -266,7 +297,8 @@ export default function PortfolioShowcase() {
                 {/* Tech Badges */}
                 <div className="flex flex-wrap gap-2 mb-6 pr-8 mt-2 md:mt-0">
                   {selectedProject.tags.map((tag: string) => (
-                    <span key={tag} className="text-xs font-semibold px-4 py-1.5 rounded-full bg-[#1E3A8A]/20 text-cyan-300 border border-[#1E3A8A]/50">
+                    <span key={tag} className="flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 rounded-full bg-[#1E3A8A]/20 text-cyan-300 border border-[#1E3A8A]/50">
+                      {getTagIcon(tag, 14)}
                       {tag}
                     </span>
                   ))}
