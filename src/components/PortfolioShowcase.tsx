@@ -1,0 +1,311 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  IconCode, 
+  IconHexagon, 
+  IconLayersOff, 
+  IconExternalLink, 
+  IconBrandGithub, 
+  IconX,
+  IconDownload
+} from '@tabler/icons-react';
+
+// --- Dummy Data ---
+const projects = [
+  {
+    id: 1,
+    title: 'Zain Portofolio',
+    description: 'Website portofolio pribadi yang dibangun dengan React, Next.js, dan Tailwind CSS.',
+    fullDescription: 'Website portofolio pribadi dengan desain modern dan elegan. Menggunakan teknologi terbaru seperti Next.js App Router, animasi mulus dari Framer Motion, dan styling dengan Tailwind CSS.',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=60',
+    tags: ['Next.js', 'Tailwind', 'React'],
+    liveDemo: '#',
+    sourceCode: '#'
+  },
+  {
+    id: 2,
+    title: '3D Konek',
+    description: 'RESTful API untuk platform e-commerce dengan fitur otentikasi, manajemen produk, dan transaksi.',
+    fullDescription: 'Sebuah sistem backend berbasis Node.js dan Express yang dirancang untuk platform e-commerce berskala menengah. Mendukung JWT authentication, image upload, dan integrasi payment gateway.',
+    image: 'https://images.unsplash.com/photo-1618477388954-7852f32655cb?w=600&auto=format&fit=crop&q=60',
+    tags: ['Node.js', 'Express', 'MongoDB'],
+    liveDemo: '#',
+    sourceCode: '#'
+  },
+  {
+    id: 3,
+    title: 'UI Design System',
+    description: 'Merancang komponen UI yang reusable dan konsisten untuk aplikasi web menggunakan Figma.',
+    fullDescription: 'Kumpulan komponen UI komprehensif yang mempermudah developer dan desainer untuk menjaga konsistensi antarmuka pengguna pada berbagai proyek internal perusahaan.',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&auto=format&fit=crop&q=60',
+    tags: ['Figma', 'UI/UX', 'Design System'],
+    liveDemo: '#',
+    sourceCode: '#'
+  }
+];
+
+const certificates = [
+  {
+    id: 1,
+    title: 'Belajar Membuat Aplikasi Web dengan React',
+    issuer: 'DICODING INDONESIA',
+    date: 'Dec 2024',
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&auto=format&fit=crop&q=60'
+  },
+  {
+    id: 2,
+    title: 'Belajar Dasar Pemrograman JavaScript',
+    issuer: 'DICODING INDONESIA',
+    date: 'Dec 2024',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=60'
+  },
+  {
+    id: 3,
+    title: 'Belajar Membuat Front-End Web untuk Pemula',
+    issuer: 'DICODING INDONESIA',
+    date: 'Dec 2024',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&auto=format&fit=crop&q=60'
+  }
+];
+
+const techStack = [
+  { category: 'Frontend', items: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion'] },
+  { category: 'Backend', items: ['Node.js', 'Express', 'REST API', 'MySQL'] },
+  { category: 'Tools', items: ['Git', 'GitHub', 'Figma', 'VS Code'] }
+];
+
+export default function PortfolioShowcase() {
+  const [activeTab, setActiveTab] = useState<'projects' | 'certificates' | 'techStack'>('projects');
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+
+  // Prevent scrolling and hide navbar when modal is open
+  useEffect(() => {
+    const navbar = document.getElementById('global-navbar');
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden';
+      if (navbar) navbar.style.transform = 'translateY(-150%)';
+    } else {
+      document.body.style.overflow = 'unset';
+      if (navbar) navbar.style.transform = '';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      if (navbar) navbar.style.transform = '';
+    };
+  }, [selectedProject]);
+
+  return (
+    <div id="project" className="w-full px-4 md:px-8 py-20 max-w-6xl mx-auto flex flex-col items-center">
+      {/* Title */}
+      <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-12 uppercase tracking-wider text-center drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+        <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-cyan-100">PORTFOLIO</span>
+        <span className="text-white ml-3">SHOWCASE</span>
+      </h2>
+
+      {/* Tabs */}
+      <div className="flex p-2 bg-[#0A1128]/80 backdrop-blur-md rounded-2xl mb-12 border border-[#1E3A8A]/50 max-w-3xl w-full mx-auto relative overflow-x-auto hide-scrollbar">
+        {(['projects', 'certificates', 'techStack'] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`flex-1 relative flex items-center justify-center gap-2 py-3 md:py-4 px-6 rounded-xl text-sm md:text-base font-bold transition-all duration-300 z-10 whitespace-nowrap
+              ${activeTab === tab ? 'text-white' : 'text-slate-400 hover:text-white hover:bg-white/5'}
+            `}
+          >
+            {activeTab === tab && (
+              <motion.div
+                layoutId="active-tab"
+                className="absolute inset-0 bg-slate-800/40 rounded-xl z-[-1] border border-slate-500/40 shadow-md"
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              />
+            )}
+            {tab === 'projects' && <IconCode size={20} />}
+            {tab === 'certificates' && <IconHexagon size={20} />}
+            {tab === 'techStack' && <IconLayersOff size={20} />}
+            <span className="capitalize">{tab === 'techStack' ? 'Tech Stack' : tab}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Content Area */}
+      <div className="w-full min-h-[400px]">
+        <AnimatePresence mode="wait">
+          {/* PROJECTS TAB */}
+          {activeTab === 'projects' && (
+            <motion.div
+              key="projects"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {projects.map((project) => (
+                <div 
+                  key={project.id}
+                  onClick={() => setSelectedProject(project)}
+                  className="bg-[#0A1128]/60 border-2 border-transparent rounded-2xl overflow-hidden cursor-pointer group hover:border-white transition-all duration-300 shadow-lg relative aspect-[4/3]"
+                >
+                  <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500 brightness-90 group-hover:brightness-110" />
+                </div>
+              ))}
+            </motion.div>
+          )}
+
+          {/* CERTIFICATES TAB */}
+          {activeTab === 'certificates' && (
+            <motion.div
+              key="certificates"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {certificates.map((cert) => (
+                <div key={cert.id} className="bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl overflow-hidden group hover:border-[#1E3A8A] transition-all duration-300 shadow-lg">
+                  <div className="h-52 relative overflow-hidden bg-slate-800">
+                    <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
+                    <div className="absolute top-4 right-4 bg-emerald-500/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                      {cert.date}
+                    </div>
+                    <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-sm text-slate-300 text-[10px] uppercase tracking-wider font-semibold px-3 py-1.5 rounded-full border border-slate-700/50 shadow-lg">
+                      {cert.issuer}
+                    </div>
+                  </div>
+                  <div className="p-6 flex flex-col gap-4 bg-[#0A1128]">
+                    <h3 className="text-lg font-bold text-slate-100 line-clamp-2 leading-snug">{cert.title}</h3>
+                    <button className="flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-cyan-400 transition-colors w-fit mt-2">
+                      <IconDownload size={18} />
+                      <span>View Certificate</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          )}
+
+          {/* TECH STACK TAB */}
+          {activeTab === 'techStack' && (
+            <motion.div
+              key="techStack"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            >
+              {techStack.map((stack) => (
+                <div key={stack.category} className="bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl p-8 hover:border-[#1E3A8A] transition-colors shadow-lg">
+                  <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span className="p-2 rounded-lg bg-cyan-950/50 text-cyan-400 border border-cyan-900/50">
+                      <IconLayersOff size={20} />
+                    </span>
+                    {stack.category}
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    {stack.items.map((item) => (
+                      <div key={item} className="flex items-center gap-3 text-slate-300 bg-[#0F172A]/50 px-4 py-3 rounded-xl border border-slate-800/50 font-medium">
+                        <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Project Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6"
+          >
+            {/* Backdrop */}
+            <div 
+              className="absolute inset-0 bg-[#060B19]/80 backdrop-blur-sm cursor-pointer" 
+              onClick={() => setSelectedProject(null)}
+            />
+
+            {/* Modal Content */}
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="relative w-full max-w-5xl bg-[#0F172A] rounded-3xl border border-slate-700/50 shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+            >
+              {/* Left Side: Image */}
+              <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-[#060B19]">
+                <img 
+                  src={selectedProject.image} 
+                  alt={selectedProject.title} 
+                  className="w-full h-full object-cover"
+                />
+                {/* Gradient overlay on mobile to transition into content */}
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-[#0F172A] to-transparent md:hidden" />
+              </div>
+
+              {/* Right Side: Details */}
+              <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col overflow-y-auto">
+                <button 
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-4 right-4 p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-full transition-colors z-10 border border-slate-700"
+                >
+                  <IconX size={20} />
+                </button>
+
+                {/* Tech Badges */}
+                <div className="flex flex-wrap gap-2 mb-6 pr-8 mt-2 md:mt-0">
+                  {selectedProject.tags.map((tag: string) => (
+                    <span key={tag} className="text-xs font-semibold px-4 py-1.5 rounded-full bg-[#1E3A8A]/20 text-cyan-300 border border-[#1E3A8A]/50">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                  {selectedProject.title}
+                </h2>
+                
+                <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-10 flex-1">
+                  {selectedProject.fullDescription}
+                </p>
+
+                {/* Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+                  <a 
+                    href={selectedProject.liveDemo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-white py-3.5 px-6 rounded-xl font-bold transition-colors flex-1 shadow-lg shadow-teal-500/20"
+                  >
+                    <IconExternalLink size={20} />
+                    Live Demo
+                  </a>
+                  <a 
+                    href={selectedProject.sourceCode}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-center gap-2 bg-[#1E293B] hover:bg-[#334155] text-white py-3.5 px-6 rounded-xl font-bold transition-colors flex-1 border border-slate-600 shadow-lg"
+                  >
+                    <IconBrandGithub size={20} />
+                    Source Code
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
