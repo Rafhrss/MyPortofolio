@@ -16,7 +16,7 @@ export default function NavbarDemo() {
   const navItems = [
     {
       name: "Home",
-      link: "#home",
+      link: "#",
     },
     {
       name: "Project",

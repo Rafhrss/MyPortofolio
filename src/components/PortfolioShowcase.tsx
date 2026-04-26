@@ -41,69 +41,7 @@ const getTagIcon = (tag: string, size = 14) => {
   return <IconCode size={size} />;
 };
 
-// --- Dummy Data ---
-const projects = [
-  {
-    id: 1,
-    title: 'RafSehat-Klinik',
-    description: 'Website RafSehat-Klinik untuk suatu instansi yang dibangun dengan React, Next.js, Tailwind CSS dan Drizzle.',
-    fullDescription: 'Sistem informasi dan manajemen klinik kesehatan (RafSehat-Klinik) yang dirancang untuk mempermudah operasional instansi kesehatan. Dibangun menggunakan stack modern Next.js, autentikasi aman dengan Better-Auth, dan pengelolaan database menggunakan Drizzle ORM serta Neon.',
-    image: 'rafklinikproject.png',
-    tags: ['Next.js', 'Tailwind', 'React', 'Drizzle', 'Neon', 'Better-Auth'],
-    liveDemo: 'https://rafsehat-klinik.vercel.app/',
-    sourceCode: 'https://github.com/Rafhrss/RafSehat-Klinik'
-  },
-  {
-    id: 2,
-    title: "Rafda Syar'i",
-    description: "Platform e-commerce toko gamis syar'i dengan fitur otentikasi, manajemen produk, dan transaksi.",
-    fullDescription: 'Aplikasi web e-commerce khusus untuk penjualan pakaian gamis syar\'i. Dilengkapi dengan antarmuka yang responsif dan elegan, katalog produk yang dinamis, serta alur transaksi yang mudah bagi pelanggan. Dibangun menggunakan React dan Vite.',
-    image: 'rafdasyariproject.png',
-    tags: ['React', 'Tailwind', 'Vite'],
-    liveDemo: 'https://rafdasyari.vercel.app/',
-    sourceCode: 'https://github.com/Rafhrss/Rafda-Store'
-  },
-  {
-    id: 3,
-    title: 'Note Forge',
-    description: 'Website catatan untuk kamu yang pelupa saat bekerja maupun aktifitas.',
-    fullDescription: 'Aplikasi pencatatan (note-taking) cerdas bergaya modern yang memungkinkan pengguna menulis dan mengelola catatan dengan mudah. Mendukung rich-text editor menggunakan Tip Tap, dan fitur autentikasi pengguna secara penuh.',
-    image: 'noteforgeproject.png',
-    tags: ['Next.js', 'Tailwind', 'React', 'Drizzle', 'Neon', 'Better-Auth', 'Tip Tap'],
-    liveDemo: 'https://next-noteforge-auth.vercel.app/',
-    sourceCode: 'https://github.com/Rafhrss/Next-Notes-Auth'
-  }
-];
-
-const certificates = [
-  {
-    id: 1,
-    title: 'Belajar Membuat Aplikasi Web dengan React',
-    issuer: 'DICODING INDONESIA',
-    date: 'Dec 2024',
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&auto=format&fit=crop&q=60'
-  },
-  {
-    id: 2,
-    title: 'Belajar Dasar Pemrograman JavaScript',
-    issuer: 'DICODING INDONESIA',
-    date: 'Dec 2024',
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=60'
-  },
-  {
-    id: 3,
-    title: 'Belajar Membuat Front-End Web untuk Pemula',
-    issuer: 'DICODING INDONESIA',
-    date: 'Dec 2024',
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&auto=format&fit=crop&q=60'
-  }
-];
-
-const techStack = [
-  { category: 'Frontend', items: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion'] },
-  { category: 'Backend', items: ['Node.js', 'Express', 'REST API', 'MySQL'] },
-  { category: 'Tools', items: ['Git', 'GitHub', 'Figma', 'VS Code'] }
-];
+import { projects, certificates, techStack } from '@/data/portfolio';
 
 export default function PortfolioShowcase() {
   const [activeTab, setActiveTab] = useState<'projects' | 'certificates' | 'techStack'>('projects');
@@ -126,7 +64,8 @@ export default function PortfolioShowcase() {
   }, [selectedProject]);
 
   return (
-    <div id="project" className="w-full px-4 md:px-8 py-20 max-w-6xl mx-auto flex flex-col items-center">
+    // max-w-7xl untuk melebarkan showcase
+    <div id="project" className="w-full px-4 md:px-8 py-20 max-w-7xl mx-auto flex flex-col items-center">
       {/* Title */}
       <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-12 uppercase tracking-wider text-center drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">
         <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-cyan-100">PORTFOLIO</span>
@@ -159,7 +98,8 @@ export default function PortfolioShowcase() {
       </div>
 
       {/* Content Area */}
-      <div className="w-full min-h-[400px]">
+      {/* rounded-[2rem] p-4 md:p-6 untuk melebarkan showcase */}
+      <div className="w-full min-h-[400px] bg-[#0A1128]/40 backdrop-blur-sm border border-[#1E3A8A]/30 rounded-[2rem] p-4 md:p-6 shadow-2xl">
         <AnimatePresence mode="wait">
           {/* PROJECTS TAB */}
           {activeTab === 'projects' && (

@@ -1,6 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-
+import ExperienceSection from "@/components/ExperienceSection";
 import PortfolioShowcase from "@/components/PortfolioShowcase";
 
 export default function Home() {
@@ -17,6 +17,11 @@ export default function Home() {
       {/* Portfolio Showcase */}
       <div className="relative z-10 pointer-events-auto">
         <PortfolioShowcase />
+      </div>
+
+      {/* Experience Section */}
+      <div className="relative z-10 pointer-events-auto">
+        <ExperienceSection />
       </div>
     </div>
   );
