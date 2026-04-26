@@ -271,7 +271,7 @@ export const NavbarButton = ({
     gradient: "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]",
   };
 
-  const DynamicTag = Tag as React.ElementType;
+  const DynamicTag = Tag as React.ElementType<{ href?: string; className?: string; children?: React.ReactNode } & Record<string, unknown>>;
 
   return (
     <DynamicTag
