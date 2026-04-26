@@ -67,9 +67,17 @@ export default function PortfolioShowcase() {
     // max-w-7xl untuk melebarkan showcase
     <div id="project" className="w-full px-4 md:px-8 py-20 max-w-7xl mx-auto flex flex-col items-center">
       {/* Title */}
-      <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-12 uppercase tracking-wider text-center drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">
-        <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-cyan-100">PORTFOLIO</span>
-        <span className="text-white ml-3">SHOWCASE</span>
+      <h2 
+        className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-12"
+        style={{ 
+          fontSize: "36px", 
+          lineHeight: "40px", 
+          fontWeight: 700,
+          WebkitTextStroke: "1px #000",
+          textShadow: "3px 3px 0px #000"
+        }}
+      >
+        PORTFOLIO SHOWCASE
       </h2>
 
       {/* Tabs */}

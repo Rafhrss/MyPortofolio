@@ -77,8 +77,8 @@ export const experiences = [
     id: 2,
     title: 'IT Network System Administrator',
     highlight: 'Kompetisi',
-    date: '2024',
-    description: 'Saya memiliki pengalaman mengikuti Lomba Kompetensi Siswa (LKS) bidang IT Network System Administration tingkat Provinsi Kepulauan Bangka Belitung tahun 2024.'
+    date: '2023',
+    description: 'Saya memiliki pengalaman mengikuti Lomba Kompetensi Siswa (LKS) bidang IT Network System Administration (ITNSA) tingkat Provinsi Kalimantan Timur tahun 2023. Mendapatkan posisi juara 2 pada lomba bidang ini.'
   },
   {
     id: 3,

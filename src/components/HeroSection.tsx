@@ -15,8 +15,14 @@ export default function HeroSection() {
 
           {/* Title */}
           <h1
-            className="text-2xl md:text-6xl lg:text-5xl font-black mb-6 uppercase leading-[1.1] tracking-wide text-cyan-300 drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]"
-            style={{ WebkitTextStroke: "1px #0891b2" }}
+            className="font-moderniz mb-6 uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)]"
+            style={{ 
+              fontSize: "36px", 
+              lineHeight: "40px", 
+              fontWeight: 700,
+              WebkitTextStroke: "1px #000",
+              textShadow: "3px 3px 0px #000"
+            }}
           >
             Welcome to my
             <br />

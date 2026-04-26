@@ -33,11 +33,11 @@ export default function RootLayout({
         {/* Global Background Animation */}
         <div className="fixed inset-0 z-[-1] w-full bg-[#242f47]">
           <ShapeGrid 
-            speed={0.15}
+            speed={0.18}
             squareSize={40}
             direction="diagonal"
-            borderColor="#1E3A8A"
-            hoverFillColor="#1E40AF"
+            borderColor="#272eac"
+            hoverFillColor="#3B82F6"
             shape="square"
             hoverTrailAmount={0}
           />

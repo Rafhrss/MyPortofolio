@@ -5,8 +5,17 @@ export default function AboutSection() {
     <div id="about" className="w-full px-8 md:px-16">
       {/* Header with Title and Line */}
       <div className="flex items-center gap-6 mb-10">
-        <h2 className="text-2xl md:text-3xl font-bold text-slate-100 flex items-center gap-3">
-          About Me
+        <h2 
+          className="font-moderniz uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] flex items-center gap-3"
+          style={{ 
+            fontSize: "36px", 
+            lineHeight: "40px", 
+            fontWeight: 700,
+            WebkitTextStroke: "1px #000",
+            textShadow: "3px 3px 0px #000"
+          }}
+        >
+          ABOUT ME
         </h2>
       </div>
 
