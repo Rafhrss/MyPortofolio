@@ -81,7 +81,7 @@ export default function ExperienceSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-200 flex items-center justify-center p-4 sm:p-6"
           >
             {/* Backdrop */}
             <div
@@ -104,7 +104,7 @@ export default function ExperienceSection() {
                   alt={selectedExp.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0F172A] to-transparent md:hidden" />
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-[#0F172A] to-transparent md:hidden" />
               </div>
 
               {/* Right Side: Details */}

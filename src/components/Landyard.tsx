@@ -28,6 +28,13 @@ interface LanyardProps {
   transparent?: boolean;
 }
 
+declare module '@react-three/fiber' {
+  interface ThreeElements {
+    meshLineGeometry: object;
+    meshLineMaterial: object;
+  }
+}
+
 export default function Lanyard({
   position = [0, 0, 30],
   gravity = [0, -40, 0],
