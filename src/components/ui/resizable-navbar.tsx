@@ -283,7 +283,7 @@ export const NavbarButton = ({
       className={cn(baseStyles, variantStyles[variant], className)}
       {...props}
     >
-      {children}
+      <>{children}</>
     </Tag>
   );
 };
