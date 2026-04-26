@@ -24,4 +24,5 @@ npm install motion
 npm install @tabler/icons-react     = IconBrandGithub, IconBrandInstagram, IconBrandLinkedin
 npx shadcn@latest add @react-bits/TextType-TS-TW
 npx shadcn@latest add @react-bits/SpotlightCard-TS-TW
+npm install @lottiefiles/dotlottie-react
 ```

@@ -65,12 +65,13 @@ export const experiences = [
   {
     id: 1,
     title: 'IT Support',
-    highlight: 'RSBT Sungailiat',
-    date: '2024-2025',
+    highlight: 'PT. United Tractors',
+    date: 'Januari 2024 - Mei 2024',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=60',
     bullets: [
-      'Mengembangkan dan memelihara infrastruktur jaringan rumah sakit, termasuk pembangunan jaringan hotspot untuk layanan WiFi publik.',
-      'Berkolaborasi dengan tim dalam pemeliharaan perangkat seperti komputer, printer, scanner, dan perangkat pendukung lainnya.',
-      'Melakukan pemeliharaan sistem operasi berbasis Windows dan Linux server.'
+      'Mengembangkan dan memelihara infrastruktur jaringan Office, termasuk pembangunan jaringan baru untuk akses WiFi antar gedung.',
+      'Berkolaborasi dengan tim dalam pemeliharaan perangkat seperti komputer, printer, Access Point, Router dan perangkat pendukung lainnya.',
+      'Melakukan pemeliharaan dan perbaikan software serta hardware.'
     ]
   },
   {
@@ -78,13 +79,15 @@ export const experiences = [
     title: 'IT Network System Administrator',
     highlight: 'Kompetisi',
     date: '2023',
+    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop&q=60',
     description: 'Saya memiliki pengalaman mengikuti Lomba Kompetensi Siswa (LKS) bidang IT Network System Administration (ITNSA) tingkat Provinsi Kalimantan Timur tahun 2023. Mendapatkan posisi juara 2 pada lomba bidang ini.'
   },
   {
     id: 3,
-    title: 'Membangun Jaringan Hotspot',
-    highlight: 'SMKN 1 Sungailiat',
-    date: '2024-2025',
-    description: 'Membangun dan mengembangkan jaringan hotspot berbasis voucher menggunakan router Mikrotik.'
+    title: 'Membangun Jaringan Fiber Optik',
+    highlight: 'SMKN 1 Tanah Grogot',
+    date: '2023',
+    image: 'https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=800&auto=format&fit=crop&q=60',
+    description: 'Membantu guru TKJ dalam migrasi jaringan dari kabel UTP ke Fiber Optic di jalur plafon dan lorong sekolah untuk meningkatkan stabilitas bandwidth antar kelas'
   }
 ];
