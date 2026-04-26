@@ -9,9 +9,9 @@ import {
 
 export default function HeroSection() {
   return (
-    <div className="container mx-7 h-screen relative z-10 pointer-events-none">
-      <div className="grid grid-cols-1 md:grid-cols-12 h-full items-center relative">
-        <div className="col-span-1 md:col-span-7 text-white p-8 md:pl-16 pointer-events-auto flex flex-col justify-center">
+    <div className="w-full max-w-7xl mx-auto px-4 md:px-8 min-h-[75vh] md:h-screen relative z-10 pointer-events-none pt-28 md:pt-0">
+      <div className="grid grid-cols-1 md:grid-cols-12 w-full h-full items-center relative">
+        <div className="col-span-1 md:col-span-7 text-white w-full py-8 md:pl-16 pointer-events-auto flex flex-col justify-center items-center md:items-start text-center md:text-left">
 
           {/* Title */}
           <h1
@@ -50,8 +50,8 @@ export default function HeroSection() {
           </p>
 
           {/* Tech Badges */}
-          <div className="flex flex-wrap gap-4 mb-10">
-            {["React", "Javascript", "Node.js", "Tailwind"].map((tech) => (
+          <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
+            {["React", "Javascript", "Python", "Tailwind"].map((tech) => (
               <div
                 key={tech}
                 className="px-5 py-2 rounded-full border border-slate-700/50 bg-slate-800/50 text-slate-200 text-sm backdrop-blur-sm shadow-sm"
@@ -62,7 +62,7 @@ export default function HeroSection() {
           </div>
 
           {/* Social Media */}
-          <div className="flex gap-4">
+          <div className="flex justify-center md:justify-start gap-4">
             <a
               href="#"
               className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
@@ -83,7 +83,8 @@ export default function HeroSection() {
             </a>
           </div>
         </div>
-        <div className="col-span-1 md:col-span-5 h-[80vh] md:h-screen absolute right-0 top-0 w-full md:w-[45%] pointer-events-auto flex items-center justify-center">
+        {/* hidden md:flex membuat Landyard hilang saat mobile */}
+        <div className="hidden md:flex col-span-1 md:col-span-5 h-[80vh] md:h-screen absolute right-0 top-0 w-full md:w-[45%] pointer-events-auto items-center justify-center">
           {/* Moved camera closer (z=13) and up (y=1.5) to significantly increase the size of the lanyard while keeping it in frame */}
           <Lanyard position={[0, 1.5, 13]} gravity={[0, -40, 0]} />
         </div>

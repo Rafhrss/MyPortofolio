@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function AboutSection() {
   return (
-    <div id="about" className="w-full px-8 md:px-16">
+    <div id="about" className="w-full px-4 md:px-8 max-w-7xl mx-auto flex flex-col items-center md:items-start text-center md:text-left">
       {/* Header with Title and Line */}
-      <div className="flex items-center gap-6 mb-10">
+      <div className="flex items-center justify-center md:justify-start gap-6 mb-10">
         <h2 
           className="font-moderniz uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] flex items-center gap-3"
           style={{ 
