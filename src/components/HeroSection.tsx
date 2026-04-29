@@ -9,7 +9,7 @@ import {
 
 export default function HeroSection() {
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 md:px-8 min-h-[75vh] md:h-screen relative z-10 pointer-events-none pt-28 md:pt-0">
+    <div className="w-full max-w-7xl mx-auto px-4 md:px-8 min-h-[75vh] md:h-screen relative pointer-events-none pt-28 md:pt-0">
       <div className="grid grid-cols-1 md:grid-cols-12 w-full h-full items-center relative">
         <div className="col-span-1 md:col-span-7 text-white w-full py-8 md:pl-16 pointer-events-auto flex flex-col justify-center items-center md:items-start text-center md:text-left">
 
