@@ -9,8 +9,8 @@ export default function AboutSection() {
         <h2 
           className="font-moderniz uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] flex items-center gap-3"
           style={{ 
-            fontSize: "36px", 
-            lineHeight: "40px", 
+            fontSize: "46px", 
+            lineHeight: "50px", 
             fontWeight: 700,
             WebkitTextStroke: "1px #000",
             textShadow: "3px 3px 0px #000"
@@ -29,7 +29,7 @@ export default function AboutSection() {
         </div>
 
         {/* Text */}
-        <div className="space-y-6 text-slate-400 text-base md:text-lg leading-[1.8] font-sans text-center md:text-left">
+        <div className="space-y-6 text-slate-400 text-base md:text-xl leading-[1.8] font-sans text-center md:text-left">
           <p>
             Saya adalah mahasiswa Teknik Informatika di Universitas Muhammadiyah Kalimantan Timur yang memiliki minat besar dalam pengembangan Full Stack dan teknologi web modern. Saya selalu bersemangat untuk belajar hal baru dan menciptakan solusi digital yang inovatif.
           </p>

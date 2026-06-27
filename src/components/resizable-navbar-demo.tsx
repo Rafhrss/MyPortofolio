@@ -19,16 +19,16 @@ export default function NavbarDemo() {
       link: "#",
     },
     {
+      name: "About",
+      link: "#about",
+    },
+    {
       name: "Project",
       link: "#project",
     },
     {
       name: "Galery",
       link: "#galery",
-    },
-    {
-      name: "About",
-      link: "#about",
     },
   ];
 

@@ -17,8 +17,8 @@ export default function HeroSection() {
           <h1
             className="font-moderniz mb-6 uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)]"
             style={{ 
-              fontSize: "36px", 
-              lineHeight: "40px", 
+              fontSize: "46px", 
+              lineHeight: "50px", 
               fontWeight: 700,
               WebkitTextStroke: "1px #000",
               textShadow: "3px 3px 0px #000"
@@ -30,7 +30,7 @@ export default function HeroSection() {
           </h1>
  
           {/* Subtitle */}
-          <div className="text-3xl md:text-4xl font-mono mb-8 text-[#38BDF8]">
+          <div className="text-4xl md:text-4xl font-mono mb-8 text-[#38BDF8]">
             <TextType
               text={["Network Engineer", "Data Analyst", "Junior Programming"]}
               typingSpeed={80}

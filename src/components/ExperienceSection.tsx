@@ -31,8 +31,8 @@ export default function ExperienceSection() {
       <h2 
         className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-16"
         style={{ 
-          fontSize: "36px", 
-          lineHeight: "40px", 
+          fontSize: "46px", 
+          lineHeight: "50px", 
           fontWeight: 700,
           WebkitTextStroke: "1px #000",
           textShadow: "3px 3px 0px #000"
