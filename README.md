@@ -26,3 +26,12 @@ npx shadcn@latest add @react-bits/TextType-TS-TW
 npx shadcn@latest add @react-bits/SpotlightCard-TS-TW
 npm install @lottiefiles/dotlottie-react
 ```
+
+## Installation Database
+```bash
+npm i drizzle-orm@rc
+npm i -D drizzle-kit@rc
+npm i @neondatabase/serverless
+
+
+```
