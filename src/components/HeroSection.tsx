@@ -15,10 +15,8 @@ export default function HeroSection() {
 
           {/* Title */}
           <h1
-            className="font-moderniz mb-6 uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)]"
+            className="font-moderniz mb-6 uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] text-[32px] leading-[40px] sm:text-[36px] sm:leading-[42px] md:text-[46px] md:leading-[50px]"
             style={{ 
-              fontSize: "46px", 
-              lineHeight: "50px", 
               fontWeight: 700,
               WebkitTextStroke: "1px #000",
               textShadow: "3px 3px 0px #000"

@@ -7,10 +7,8 @@ export default function AboutSection() {
       {/* Header */}
       <div className="flex items-center justify-center md:justify-start gap-6 mb-10">
         <h2 
-          className="font-moderniz uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] flex items-center gap-3"
+          className="font-moderniz uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] flex items-center gap-3 text-[28px] leading-[36px] sm:text-[36px] sm:leading-[42px] md:text-[46px] md:leading-[50px]"
           style={{ 
-            fontSize: "46px", 
-            lineHeight: "50px", 
             fontWeight: 700,
             WebkitTextStroke: "1px #000",
             textShadow: "3px 3px 0px #000"

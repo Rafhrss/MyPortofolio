@@ -123,10 +123,9 @@ export default function PortfolioShowcase({
     <div id="project" className="w-full px-4 md:px-8 py-20 max-w-7xl mx-auto flex flex-col items-center">
       {/* Title */}
       <h2 
-        className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-12"
+      // Tailwind untuk mengatur besar size text
+        className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-12 text-[28px] leading-[36px] sm:text-[36px] sm:leading-[42px] md:text-[46px] md:leading-[50px]"
         style={{ 
-          fontSize: "46px", 
-          lineHeight: "50px", 
           fontWeight: 700,
           WebkitTextStroke: "1px #000",
           textShadow: "3px 3px 0px #000"
@@ -136,12 +135,12 @@ export default function PortfolioShowcase({
       </h2>
 
       {/* Tabs */}
-      <div className="flex p-2 bg-[#0A1128]/80 backdrop-blur-md rounded-2xl mb-12 border border-[#1E3A8A]/50 max-w-3xl w-full mx-auto relative overflow-x-auto hide-scrollbar">
+      <div className="flex flex-wrap justify-center p-2 bg-[#0A1128]/80 backdrop-blur-md rounded-2xl mb-12 border border-[#1E3A8A]/50 max-w-3xl w-full mx-auto relative gap-2 md:gap-0">
         {(['projects', 'certificates', 'techStack'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 relative flex items-center justify-center gap-2 py-3 md:py-4 px-6 rounded-xl text-sm md:text-base font-bold transition-all duration-300 z-10 whitespace-nowrap
+            className={`flex-1 min-w-[130px] md:min-w-0 relative flex items-center justify-center gap-2 py-3 md:py-4 px-3 md:px-6 rounded-xl text-sm md:text-base font-bold transition-all duration-300 z-10 whitespace-nowrap
               ${activeTab === tab ? 'text-white' : 'text-slate-400 hover:text-white hover:bg-white/5'}
             `}
           >
@@ -265,7 +264,7 @@ export default function PortfolioShowcase({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6"
           >
             {/* Backdrop */}
             <div 

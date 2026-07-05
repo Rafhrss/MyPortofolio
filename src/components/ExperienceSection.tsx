@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -33,10 +34,8 @@ export default function ExperienceSection({ initialExperiences = [] }: Experienc
     <div id="experience" className="w-full px-4 md:px-8 py-20 max-w-7xl mx-auto flex flex-col items-center">
       {/* Title */}
       <h2 
-        className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-16"
+        className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-16 text-[28px] leading-[36px] sm:text-[36px] sm:leading-[42px] md:text-[46px] md:leading-[50px]"
         style={{ 
-          fontSize: "46px", 
-          lineHeight: "50px", 
           fontWeight: 700,
           WebkitTextStroke: "1px #000",
           textShadow: "3px 3px 0px #000"
@@ -85,7 +84,7 @@ export default function ExperienceSection({ initialExperiences = [] }: Experienc
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6"
           >
             {/* Backdrop */}
             <div
@@ -103,10 +102,11 @@ export default function ExperienceSection({ initialExperiences = [] }: Experienc
             >
               {/* Left Side: Image */}
               <div className="w-full md:w-1/2 h-56 md:h-auto relative bg-[#060B19] shrink-0">
-                <img
-                  src={selectedExp.image}
+                <Image
+                  fill
+                  src={selectedExp.image || ''}
                   alt={selectedExp.title}
-                  className="w-full h-full object-cover"
+                  className="object-cover"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-[#0F172A] to-transparent md:hidden" />
               </div>
