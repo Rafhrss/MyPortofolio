@@ -4,9 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IconX, IconBriefcase, IconCalendar } from '@tabler/icons-react';
 import SpotlightCard from './SpotlightCard';
-import { experiences } from '@/data/portfolio';
 
-export default function ExperienceSection() {
+interface ExperienceSectionProps {
+  initialExperiences?: { id: number; title: string; highlight: string | null; date: string | null; image: string | null; description: string | null; bullets: string[] | null }[];
+}
+
+export default function ExperienceSection({ initialExperiences = [] }: ExperienceSectionProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedExp, setSelectedExp] = useState<any>(null);
 
   // Prevent scrolling and hide navbar when modal is open
@@ -43,7 +47,7 @@ export default function ExperienceSection() {
 
       {/* Experience Cards */}
       <div className="w-full flex flex-col gap-6">
-        {experiences.map((exp) => (
+        {initialExperiences.map((exp) => (
           <SpotlightCard 
             key={exp.id}
             onClick={() => setSelectedExp(exp)}

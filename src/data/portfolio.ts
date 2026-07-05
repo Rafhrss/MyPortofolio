@@ -4,7 +4,7 @@ export const projects = [
     title: 'RafSehat-Klinik',
     description: 'Website RafSehat-Klinik untuk suatu instansi yang dibangun dengan React, Next.js, Tailwind CSS dan Drizzle.',
     fullDescription: 'Sistem informasi dan manajemen klinik kesehatan (RafSehat-Klinik) yang dirancang untuk mempermudah operasional instansi kesehatan. Dibangun menggunakan stack modern Next.js, autentikasi aman dengan Better-Auth, dan pengelolaan database menggunakan Drizzle ORM serta Neon.',
-    image: 'assets/rafklinikproject.png',
+    image: '/assets/rafklinikproject.png',
     tags: ['Next.js', 'Tailwind', 'React', 'Drizzle', 'Neon', 'Better-Auth'],
     liveDemo: 'https://rafsehat-klinik.vercel.app/',
     sourceCode: 'https://github.com/Rafhrss/RafSehat-Klinik'
@@ -14,7 +14,7 @@ export const projects = [
     title: "Rafda Syar'i",
     description: "Platform e-commerce toko gamis syar'i dengan fitur otentikasi, manajemen produk, dan transaksi.",
     fullDescription: 'Aplikasi web e-commerce khusus untuk penjualan pakaian gamis syar\'i. Dilengkapi dengan antarmuka yang responsif dan elegan, katalog produk yang dinamis, serta alur transaksi yang mudah bagi pelanggan. Dibangun menggunakan React dan Vite.',
-    image: 'assets/rafdasyariproject.png',
+    image: '/assets/rafdasyariproject.png',
     tags: ['React', 'Tailwind', 'Vite'],
     liveDemo: 'https://rafdasyari.vercel.app/',
     sourceCode: 'https://github.com/Rafhrss/Rafda-Store'
@@ -24,7 +24,7 @@ export const projects = [
     title: 'Note Forge',
     description: 'Website catatan untuk kamu yang pelupa saat bekerja maupun aktifitas.',
     fullDescription: 'Aplikasi pencatatan (note-taking) cerdas bergaya modern yang memungkinkan pengguna menulis dan mengelola catatan dengan mudah. Mendukung rich-text editor menggunakan Tip Tap, dan fitur autentikasi pengguna secara penuh.',
-    image: 'assets/noteforgeproject.png',
+    image: '/assets/noteforgeproject.png',
     tags: ['Next.js', 'Tailwind', 'React', 'Drizzle', 'Neon', 'Better-Auth', 'Tip Tap'],
     liveDemo: 'https://next-noteforge-auth.vercel.app/',
     sourceCode: 'https://github.com/Rafhrss/Next-Notes-Auth'
@@ -34,7 +34,7 @@ export const projects = [
     title: 'My History Log',
     description: 'Website untuk menceritakan keluhan atau kegiatan & aktifitas yang kamu lalui hari ini, situs blog yang menyediakan kategori cerita yang kamu butuhkan.',
     fullDescription: 'My History Log adalah platform blog personal yang dirancang untuk membantu pengguna mencatat, mengekspresikan, dan mengelola cerita kehidupan sehari-hari—mulai dari keluhan, pengalaman, hingga aktivitas harian. Aplikasi ini dilengkapi dengan rich-text editor berbasis TipTap yang memungkinkan penulisan lebih fleksibel dan ekspresif, serta sistem autentikasi pengguna yang aman untuk menjaga privasi setiap cerita. Dengan dukungan kategori yang terstruktur, pengguna dapat dengan mudah mengorganisir dan menemukan kembali setiap momen yang telah dibagikan.',
-    image: 'assets/myhistoryproject.png',
+    image: '/assets/myhistoryproject.png',
     tags: ['TailwindCSS', 'Django', 'HTML5', 'Neon',],
     liveDemo: 'https://myhistorylog.vercel.app',
     sourceCode: 'https://github.com/Rafhrss/MyHistoryLog'
@@ -77,7 +77,7 @@ export const experiences = [
     title: 'IT Support',
     highlight: 'PT. United Tractors',
     date: 'Januari 2024 - Mei 2024',
-    image: 'assets/magang.jpg',
+    image: '/assets/magang.jpg',
     bullets: [
       'Mengembangkan dan memelihara infrastruktur jaringan Office, termasuk pembangunan jaringan baru untuk akses WiFi antar gedung.',
       'Berkolaborasi dengan tim dalam pemeliharaan perangkat seperti komputer, printer, Access Point, Router dan perangkat pendukung lainnya.',
@@ -89,7 +89,7 @@ export const experiences = [
     title: 'IT Network System Administrator',
     highlight: 'Kompetisi',
     date: '2023',
-    image: 'assets/itnsa.jpeg',
+    image: '/assets/itnsa.jpeg',
     description: 'Saya memiliki pengalaman mengikuti Lomba Kompetensi Siswa (LKS) bidang IT Network System Administration (ITNSA) tingkat Provinsi Kalimantan Timur tahun 2023. Mendapatkan posisi juara 2 pada lomba bidang ini.'
   },
   {
@@ -97,7 +97,7 @@ export const experiences = [
     title: 'Membangun Jaringan Fiber Optik',
     highlight: 'SMKN 1 Tanah Grogot',
     date: '2022',
-    image: 'assets/fo.jpeg',
+    image: '/assets/fo.jpeg',
     description: 'Membantu guru TKJ dalam migrasi jaringan dari kabel UTP ke Fiber Optic di jalur plafon dan lorong sekolah untuk meningkatkan stabilitas bandwidth antar kelas'
   }
 ];

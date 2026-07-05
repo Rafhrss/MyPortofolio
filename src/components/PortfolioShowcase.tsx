@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -41,10 +42,64 @@ const getTagIcon = (tag: string, size = 14) => {
   return <IconCode size={size} />;
 };
 
-import { projects, certificates, techStack } from '@/data/portfolio';
+// Removed static data import: import { projects, certificates, techStack as fallbackTechStack } from '@/data/portfolio';
+import {
+  ReactIcon,
+  NextjsIcon,
+  JavaScriptIcon,
+  TailwindCSSIcon,
+  HTML5Icon,
+  CSSIcon,
+  NodejIcon,
+  FlaskIcon,
+  DjangoIcon,
+  MySQLIcon,
+  PythonIcon,
+  DrizzleORMIcon,
+  NeonIcon,
+  GitIcon,
+  GitHubIcon,
+  FigmaIcon,
+  PostmanIcon,
+} from '@/components/ui/icons';
 
-export default function PortfolioShowcase() {
+// Kamus Ikon
+const iconMap: Record<string, React.ReactNode> = {
+  "React": <ReactIcon className="w-8 h-8 mb-2" />,
+  "Next.js": <NextjsIcon className="w-8 h-8 mb-2" />,
+  "JavaScript": <JavaScriptIcon className="w-8 h-8 mb-2" />,
+  "Tailwind CSS": <TailwindCSSIcon className="w-8 h-8 mb-2" />,
+  "HTML5": <HTML5Icon className="w-8 h-8 mb-2" />,
+  "CSS3": <CSSIcon className="w-8 h-8 mb-2" />,
+  "Node.js": <NodejIcon className="w-8 h-8 mb-2" />,
+  "Flask": <FlaskIcon className="w-8 h-8 mb-2" />,
+  "Django": <DjangoIcon className="w-8 h-8 mb-2" />,
+  "MySQL": <MySQLIcon className="w-8 h-8 mb-2" />,
+  "Python": <PythonIcon className="w-8 h-8 mb-2" />,
+  "Drizzle": <DrizzleORMIcon className="w-8 h-8 mb-2" />,
+  "Neon": <NeonIcon className="w-8 h-8 mb-2" />,
+  "Git": <GitIcon className="w-8 h-8 mb-2" />,
+  "GitHub": <GitHubIcon className="w-8 h-8 mb-2" />,
+  "Figma": <FigmaIcon className="w-8 h-8 mb-2" />,
+  "Postman": <PostmanIcon className="w-8 h-8 mb-2" />,
+};
+
+interface PortfolioShowcaseProps {
+  initialTechStack?: { id?: number; category: string; items: string[] | null }[];
+  initialProjects?: { id: number; title: string; image: string | null; description: string | null; fullDescription: string | null; liveDemo: string | null; sourceCode: string | null; tags: string[] | null }[];
+  initialCertificates?: { id: number; title: string; image: string | null; date: string | null; issuer: string | null }[];
+}
+
+export default function PortfolioShowcase({ 
+  initialTechStack = [], 
+  initialProjects = [], 
+  initialCertificates = [] 
+}: PortfolioShowcaseProps) {
+  const currentTechStack = initialTechStack;
+  const currentProjects = initialProjects;
+  const currentCertificates = initialCertificates;
   const [activeTab, setActiveTab] = useState<'projects' | 'certificates' | 'techStack'>('projects');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedProject, setSelectedProject] = useState<any>(null);
 
   // Prevent scrolling and hide navbar when modal is open
@@ -119,13 +174,13 @@ export default function PortfolioShowcase() {
               transition={{ duration: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {projects.map((project) => (
+              {currentProjects.map((project) => (
                 <div 
                   key={project.id}
                   onClick={() => setSelectedProject(project)}
                   className="bg-[#0A1128]/60 border-2 border-transparent rounded-2xl overflow-hidden cursor-pointer group hover:border-white transition-all duration-300 shadow-lg relative aspect-4/3"
                 >
-                  <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500 brightness-90 group-hover:brightness-110" />
+                  <Image fill src={project.image?.startsWith('/') ? project.image : `/${project.image || ''}`} alt={project.title} className="object-cover group-hover:scale-105 transition-all duration-500 brightness-90 group-hover:brightness-110" />
                 </div>
               ))}
             </motion.div>
@@ -141,10 +196,10 @@ export default function PortfolioShowcase() {
               transition={{ duration: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {certificates.map((cert) => (
+              {currentCertificates.map((cert) => (
                 <div key={cert.id} className="bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl overflow-hidden group hover:border-[#1E3A8A] transition-all duration-300 shadow-lg">
                   <div className="h-52 relative overflow-hidden bg-slate-800">
-                    <img src={cert.image} alt={cert.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
+                    <Image fill src={cert.image?.startsWith('http') ? cert.image : (cert.image?.startsWith('/') ? cert.image : `/${cert.image || ''}`)} alt={cert.title} className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
                     <div className="absolute top-4 right-4 bg-emerald-500/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
                       {cert.date}
                     </div>
@@ -172,23 +227,27 @@ export default function PortfolioShowcase() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              className="flex flex-col gap-8"
             >
-              {techStack.map((stack) => (
-                <div key={stack.category} className="bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl p-8 hover:border-[#1E3A8A] transition-colors shadow-lg">
-                  <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                    <span className="p-2 rounded-lg bg-cyan-950/50 text-cyan-400 border border-cyan-900/50">
-                      <IconLayersOff size={20} />
-                    </span>
+              {currentTechStack.map((stack) => (
+                <div key={stack.category} className="flex flex-col gap-4">
+                  <h3 className="text-xl font-bold text-cyan-400 drop-shadow-[0_0_10px_rgba(0,255,220,0.5)]">
                     {stack.category}
                   </h3>
-                  <div className="flex flex-col gap-3">
-                    {stack.items.map((item) => (
-                      <div key={item} className="flex items-center gap-3 text-slate-300 bg-[#0F172A]/50 px-4 py-3 rounded-xl border border-slate-800/50 font-medium">
-                        <div className="text-cyan-400">
-                          {getTagIcon(item, 20)}
+                  
+                  {/* Horizontal Grid */}
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+                    {(stack.items || []).map((item) => (
+                      <div 
+                        key={item} 
+                        className="flex flex-col items-center justify-center p-4 bg-[#0A1128]/80 border border-[#1E3A8A]/50 rounded-xl hover:border-cyan-400/50 hover:bg-[#1E3A8A]/20 transition-all duration-300 shadow-sm group"
+                      >
+                        <div className="group-hover:scale-110 transition-transform duration-300 text-slate-300 group-hover:text-cyan-300 flex flex-col items-center">
+                          {iconMap[item] || <IconCode size={32} className="mb-2 text-cyan-400" />}
                         </div>
-                        {item}
+                        <span className="text-lg font-medium text-slate-300 group-hover:text-white text-center mt-1 line-clamp-1">
+                          {item}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -224,11 +283,12 @@ export default function PortfolioShowcase() {
             >
               {/* Left Side: Image */}
               <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-[#060B19]">
-                <img 
-                  src={selectedProject.image} 
+                <Image 
+                  fill
+                  src={selectedProject.image?.startsWith('/') ? selectedProject.image : `/${selectedProject.image || ''}`} 
                   alt={selectedProject.title} 
                   // kalo object-cover tampilan project bakal full dan terpotong
-                  className="w-full h-full object-contain p-4 md:p-6"
+                  className="object-contain p-4 md:p-6"
                 />
                 {/* Gradient overlay on mobile to transition into content */}
                 <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-[#0F172A] to-transparent md:hidden" />
