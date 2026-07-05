@@ -10,78 +10,61 @@ import {
   IconExternalLink, 
   IconBrandGithub, 
   IconX,
-  IconDownload,
-  IconBrandReact,
-  IconBrandNextjs,
-  IconBrandTailwind,
-  IconBrandVite,
-  IconDatabase,
-  IconShieldCheck,
-  IconPencil,
-  IconBrandNodejs,
-  IconBrandFigma,
-  IconBrandGit,
-  IconBrandVscode
+  IconDownload
 } from '@tabler/icons-react';
 
-// --- Helper for Icons ---
-const getTagIcon = (tag: string, size = 14) => {
-  const t = tag.toLowerCase();
-  if (t.includes('react')) return <IconBrandReact size={size} />;
-  if (t.includes('next.js')) return <IconBrandNextjs size={size} />;
-  if (t.includes('tailwind')) return <IconBrandTailwind size={size} />;
-  if (t.includes('vite')) return <IconBrandVite size={size} />;
-  if (t.includes('node.js') || t.includes('express')) return <IconBrandNodejs size={size} />;
-  if (t.includes('figma')) return <IconBrandFigma size={size} />;
-  if (t.includes('github')) return <IconBrandGithub size={size} />;
-  if (t.includes('git')) return <IconBrandGit size={size} />;
-  if (t.includes('vs code')) return <IconBrandVscode size={size} />;
-  if (t.includes('drizzle') || t.includes('neon') || t.includes('mysql') || t.includes('api')) return <IconDatabase size={size} />;
-  if (t.includes('auth')) return <IconShieldCheck size={size} />;
-  if (t.includes('tip tap')) return <IconPencil size={size} />;
-  return <IconCode size={size} />;
-};
-
 // Removed static data import: import { projects, certificates, techStack as fallbackTechStack } from '@/data/portfolio';
-import {
-  ReactIcon,
-  NextjsIcon,
-  JavaScriptIcon,
-  TailwindCSSIcon,
-  HTML5Icon,
-  CSSIcon,
-  NodejIcon,
-  FlaskIcon,
-  DjangoIcon,
-  MySQLIcon,
-  PythonIcon,
-  DrizzleORMIcon,
-  NeonIcon,
-  GitIcon,
-  GitHubIcon,
-  FigmaIcon,
-  PostmanIcon,
-} from '@/components/ui/icons';
+import * as Icons from '@/components/ui/icons';
 
 // Kamus Ikon
 const iconMap: Record<string, React.ReactNode> = {
-  "React": <ReactIcon className="w-8 h-8 mb-2" />,
-  "Next.js": <NextjsIcon className="w-8 h-8 mb-2" />,
-  "JavaScript": <JavaScriptIcon className="w-8 h-8 mb-2" />,
-  "Tailwind CSS": <TailwindCSSIcon className="w-8 h-8 mb-2" />,
-  "HTML5": <HTML5Icon className="w-8 h-8 mb-2" />,
-  "CSS3": <CSSIcon className="w-8 h-8 mb-2" />,
-  "Node.js": <NodejIcon className="w-8 h-8 mb-2" />,
-  "Flask": <FlaskIcon className="w-8 h-8 mb-2" />,
-  "Django": <DjangoIcon className="w-8 h-8 mb-2" />,
-  "MySQL": <MySQLIcon className="w-8 h-8 mb-2" />,
-  "Python": <PythonIcon className="w-8 h-8 mb-2" />,
-  "Drizzle": <DrizzleORMIcon className="w-8 h-8 mb-2" />,
-  "Neon": <NeonIcon className="w-8 h-8 mb-2" />,
-  "Git": <GitIcon className="w-8 h-8 mb-2" />,
-  "GitHub": <GitHubIcon className="w-8 h-8 mb-2" />,
-  "Figma": <FigmaIcon className="w-8 h-8 mb-2" />,
-  "Postman": <PostmanIcon className="w-8 h-8 mb-2" />,
+  "React": <Icons.ReactIcon className="w-8 h-8 mb-2" />,
+  "Next.js": <Icons.NextjsIcon className="w-8 h-8 mb-2" />,
+  "JavaScript": <Icons.JavaScriptIcon className="w-8 h-8 mb-2" />,
+  "Tailwind CSS": <Icons.TailwindCSSIcon className="w-8 h-8 mb-2" />,
+  "Tailwind": <Icons.TailwindCSSIcon className="w-8 h-8 mb-2" />,
+  "HTML5": <Icons.HTML5Icon className="w-8 h-8 mb-2" />,
+  "CSS3": <Icons.CSSIcon className="w-8 h-8 mb-2" />,
+  "Node.js": <Icons.NodejIcon className="w-8 h-8 mb-2" />,
+  "Flask": <Icons.FlaskIcon className="w-8 h-8 mb-2" />,
+  "Django": <Icons.DjangoIcon className="w-8 h-8 mb-2" />,
+  "MySQL": <Icons.MySQLIcon className="w-8 h-8 mb-2" />,
+  "Python": <Icons.PythonIcon className="w-8 h-8 mb-2" />,
+  "Drizzle": <Icons.DrizzleORMIcon className="w-8 h-8 mb-2" />,
+  "Neon": <Icons.NeonIcon className="w-8 h-8 mb-2" />,
+  "Git": <Icons.GitIcon className="w-8 h-8 mb-2" />,
+  "GitHub": <Icons.GitHubIcon className="w-8 h-8 mb-2" />,
+  "Figma": <Icons.FigmaIcon className="w-8 h-8 mb-2" />,
+  "Postman": <Icons.PostmanIcon className="w-8 h-8 mb-2" />,
+  "BetterAuth": <Icons.BetterAuthIcon className="w-8 h-8 mb-2" />,
+  "Better-Auth": <Icons.BetterAuthIcon className="w-8 h-8 mb-2" />,
+  "Vite": <Icons.ViteIcon className="w-8 h-8 mb-2" />,
+};
+
+// Komponen Ikon Mentah untuk dirender dinamis (tanpa class bawaan)
+const iconComponentMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+  "React": Icons.ReactIcon,
+  "Next.js": Icons.NextjsIcon,
+  "JavaScript": Icons.JavaScriptIcon,
+  "Tailwind CSS": Icons.TailwindCSSIcon,
+  "TailwindCSS": Icons.TailwindCSSIcon,
+  "Tailwind": Icons.TailwindCSSIcon,
+  "HTML5": Icons.HTML5Icon,
+  "CSS3": Icons.CSSIcon,
+  "Node.js": Icons.NodejIcon,
+  "Flask": Icons.FlaskIcon,
+  "Django": Icons.DjangoIcon,
+  "MySQL": Icons.MySQLIcon,
+  "Python": Icons.PythonIcon,
+  "Drizzle": Icons.DrizzleORMIcon,
+  "Neon": Icons.NeonIcon,
+  "Git": Icons.GitIcon,
+  "GitHub": Icons.GitHubIcon,
+  "Figma": Icons.FigmaIcon,
+  "Postman": Icons.PostmanIcon,
+  "BetterAuth": Icons.BetterAuthIcon,
+  "Better-Auth": Icons.BetterAuthIcon,
+  "Vite": Icons.ViteIcon,
 };
 
 interface PortfolioShowcaseProps {
@@ -112,9 +95,21 @@ export default function PortfolioShowcase({
       document.body.style.overflow = 'unset';
       if (navbar) navbar.style.transform = '';
     }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedProject(null);
+      }
+    };
+
+    if (selectedProject) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
     return () => {
       document.body.style.overflow = 'unset';
       if (navbar) navbar.style.transform = '';
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [selectedProject]);
 
@@ -304,12 +299,16 @@ export default function PortfolioShowcase({
 
                 {/* Tech Badges */}
                 <div className="flex flex-wrap gap-2 mb-6 pr-8 mt-2 md:mt-0">
-                  {selectedProject.tags.map((tag: string) => (
-                    <span key={tag} className="flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 rounded-full bg-[#1E3A8A]/20 text-cyan-300 border border-[#1E3A8A]/50">
-                      {getTagIcon(tag, 14)}
-                      {tag}
-                    </span>
-                  ))}
+                  {selectedProject.tags.map((tag: string) => {
+                    const matchedKey = Object.keys(iconComponentMap).find(k => k.toLowerCase() === tag.toLowerCase());
+                    const IconComponent = matchedKey ? iconComponentMap[matchedKey] : null;
+                    return (
+                      <span key={tag} className="flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 rounded-full bg-[#1E3A8A]/20 text-cyan-300 border border-[#1E3A8A]/50">
+                        {IconComponent ? <IconComponent className="w-[14px] h-[14px]" /> : <IconCode size={14} />}
+                        {tag}
+                      </span>
+                    );
+                  })}
                 </div>
 
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
@@ -337,7 +336,7 @@ export default function PortfolioShowcase({
                     rel="noreferrer"
                     className="flex items-center justify-center gap-2 bg-[#1E293B] hover:bg-[#334155] text-white py-3.5 px-6 rounded-xl font-bold transition-colors flex-1 border border-slate-600 shadow-lg"
                   >
-                    <IconBrandGithub size={20} />
+                    <Icons.GitHubIcon className="w-8" />
                     Source Code
                   </a>
                 </div>

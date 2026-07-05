@@ -24,9 +24,21 @@ export default function ExperienceSection({ initialExperiences = [] }: Experienc
       document.body.style.overflow = 'unset';
       if (navbar) navbar.style.transform = '';
     }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedExp(null);
+      }
+    };
+
+    if (selectedExp) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
     return () => {
       document.body.style.overflow = 'unset';
       if (navbar) navbar.style.transform = '';
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [selectedExp]);
 
