@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IconX, IconBriefcase, IconCalendar } from '@tabler/icons-react';
 import SpotlightCard from './SpotlightCard';
@@ -46,7 +46,7 @@ export default function ExperienceSection({ initialExperiences = [] }: Experienc
     <div id="experience" className="w-full px-4 md:px-8 py-20 max-w-7xl mx-auto flex flex-col items-center">
       {/* Title */}
       <h2 
-        className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-16 text-[28px] leading-[36px] sm:text-[36px] sm:leading-[42px] md:text-[46px] md:leading-[50px]"
+        className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-16 text-[28px] leading-9 sm:text-[36px] sm:leading-10.5 md:text-[46px] md:leading-12.5"
         style={{ 
           fontWeight: 700,
           WebkitTextStroke: "1px #000",

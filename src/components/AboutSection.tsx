@@ -22,7 +22,7 @@ export default function AboutSection() {
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
 
         {/* Lottie Animation */}
-        <div className="w-full max-w-[280px] md:max-w-[380px] shrink-0">
+        <div className="w-full max-w-70 md:max-w-95 shrink-0">
           <Lottie />
         </div>
 

@@ -1,11 +1,7 @@
 import React from "react";
 import Lanyard from "@/components/Landyard";
 import TextType from "@/components/TextType";
-import {
-  IconBrandGithub,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-} from "@tabler/icons-react";
+import { IconBrandGithub, IconBrandInstagram, IconBrandLinkedin } from "@tabler/icons-react";
 
 export default function HeroSection() {
   return (
@@ -15,7 +11,7 @@ export default function HeroSection() {
 
           {/* Title */}
           <h1
-            className="font-moderniz mb-6 uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] text-[32px] leading-[40px] sm:text-[36px] sm:leading-[42px] md:text-[46px] md:leading-[50px]"
+            className="font-moderniz mb-6 uppercase tracking-wider text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] text-[32px] leading-10 sm:text-[36px] sm:leading-10.5 md:text-[46px] md:leading-12.5"
             style={{ 
               fontWeight: 700,
               WebkitTextStroke: "1px #000",
@@ -26,7 +22,7 @@ export default function HeroSection() {
             <br />
             Portfolio
           </h1>
- 
+
           {/* Subtitle */}
           <div className="text-4xl md:text-4xl font-mono mb-8 text-[#38BDF8]">
             <TextType

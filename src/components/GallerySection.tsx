@@ -22,10 +22,15 @@ export default function GallerySection({ initialActivities }: { initialActivitie
   return (
     <section id="galery" className="container mx-auto px-4 py-20 relative z-10">
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-600">
-            My Gallery
-          </span>
+        <h2 
+          className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-4 text-[28px] leading-9 sm:text-[36px] sm:leading-10.5 md:text-[46px] md:leading-12.5"
+          style={{ 
+            fontWeight: 700,
+            WebkitTextStroke: "1px #000",
+            textShadow: "3px 3px 0px #000"
+          }}
+        >
+          MY GALLERY
         </h2>
         <p className="text-slate-400 text-lg max-w-2xl mx-auto">
           Beberapa momen dan aktivitas terbaru.

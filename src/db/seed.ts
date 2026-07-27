@@ -16,6 +16,13 @@ async function main() {
   console.log("🌱 Memulai proses seeding database...");
 
   try {
+    console.log("Menghapus data lama untuk mencegah duplikasi...");
+    await db.delete(schema.comments);
+    await db.delete(schema.activities);
+    await db.delete(schema.projects);
+    await db.delete(schema.certificates);
+    await db.delete(schema.techStack);
+    await db.delete(schema.experiences);
     // 1. Seed Projects
     console.log("Memasukkan data Projects...");
     for (const project of projects) {
