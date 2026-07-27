@@ -16,19 +16,19 @@ export default function NavbarDemo() {
   const navItems = [
     {
       name: "Home",
-      link: "#",
+      link: "/",
     },
     {
       name: "About",
-      link: "#about",
+      link: "/#about",
     },
     {
       name: "Project",
-      link: "#project",
+      link: "/#project",
     },
     {
       name: "Galery",
-      link: "#galery",
+      link: "/gallery",
     },
   ];
 

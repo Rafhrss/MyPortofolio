@@ -8,7 +8,6 @@ import {
   IconHexagon, 
   IconLayersOff, 
   IconExternalLink, 
-  IconBrandGithub, 
   IconX,
   IconDownload
 } from '@tabler/icons-react';
@@ -119,7 +118,7 @@ export default function PortfolioShowcase({
       {/* Title */}
       <h2 
       // Tailwind untuk mengatur besar size text
-        className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-12 text-[28px] leading-[36px] sm:text-[36px] sm:leading-[42px] md:text-[46px] md:leading-[50px]"
+        className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-12 text-[28px] leading-9 sm:text-[36px] sm:leading-10.5 md:text-[46px] md:leading-12.5"
         style={{ 
           fontWeight: 700,
           WebkitTextStroke: "1px #000",
@@ -135,7 +134,7 @@ export default function PortfolioShowcase({
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 min-w-[130px] md:min-w-0 relative flex items-center justify-center gap-2 py-3 md:py-4 px-3 md:px-6 rounded-xl text-sm md:text-base font-bold transition-all duration-300 z-10 whitespace-nowrap
+            className={`flex-1 min-w-32.5 md:min-w-0 relative flex items-center justify-center gap-2 py-3 md:py-4 px-3 md:px-6 rounded-xl text-sm md:text-base font-bold transition-all duration-300 z-10 whitespace-nowrap
               ${activeTab === tab ? 'text-white' : 'text-slate-400 hover:text-white hover:bg-white/5'}
             `}
           >
@@ -156,7 +155,7 @@ export default function PortfolioShowcase({
 
       {/* Content Area */}
       {/* rounded-[2rem] p-4 md:p-6 untuk melebarkan showcase */}
-      <div className="w-full min-h-[400px] bg-[#0A1128]/40 backdrop-blur-sm border border-[#1E3A8A]/30 rounded-[2rem] p-4 md:p-6 shadow-2xl">
+      <div className="w-full min-h-100 bg-[#0A1128]/40 backdrop-blur-sm border border-[#1E3A8A]/30 rounded-[2rem] p-4 md:p-6 shadow-2xl">
         <AnimatePresence mode="wait">
           {/* PROJECTS TAB */}
           {activeTab === 'projects' && (
@@ -304,7 +303,7 @@ export default function PortfolioShowcase({
                     const IconComponent = matchedKey ? iconComponentMap[matchedKey] : null;
                     return (
                       <span key={tag} className="flex items-center gap-1.5 text-xs font-semibold px-4 py-1.5 rounded-full bg-[#1E3A8A]/20 text-cyan-300 border border-[#1E3A8A]/50">
-                        {IconComponent ? <IconComponent className="w-[14px] h-[14px]" /> : <IconCode size={14} />}
+                        {IconComponent ? <IconComponent className="w-3.5 h-3.5" /> : <IconCode size={14} />}
                         {tag}
                       </span>
                     );
