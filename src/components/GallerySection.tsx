@@ -111,8 +111,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
   const formatDate = (date: Date | null | undefined) => {
     if (!date) return '';
     return new Intl.DateTimeFormat('id-ID', {
-      day: 'numeric', month: 'short', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
+      day: 'numeric', month: 'short', year: 'numeric'
     }).format(new Date(date));
   };
 
@@ -180,14 +179,14 @@ export default function GallerySection({ initialActivities }: { initialActivitie
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedActivity(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/80"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#0A1128] border border-[#1E3A8A]/50 rounded-3xl overflow-hidden shadow-2xl w-full max-w-4xl max-h-[85vh] flex flex-col md:flex-row relative"
+              className="bg-[#0A1128] border border-[#1E3A8A]/50 rounded-3xl overflow-hidden shadow-2xl w-full max-w-4xl max-h-[80vh] md:max-h-[85vh] flex flex-col md:flex-row relative mt-8 md:mt-0"
             >
               {/* Close Button */}
               <button
@@ -199,73 +198,46 @@ export default function GallerySection({ initialActivities }: { initialActivitie
 
               {/* Left Side: Image */}
               <div className="w-full md:w-1/2 bg-black flex items-center justify-center relative min-h-75 md:min-h-full">
-                <Image
-                  src={selectedActivity.imageUrl}
-                  alt={selectedActivity.title || 'Activity Image'}
-                  fill
-                  className="object-contain"
-                />
+                <div className="absolute inset-0 pt-8 pb-2 md:pt-4">
+                  <Image
+                    src={selectedActivity.imageUrl}
+                    alt={selectedActivity.title || 'Activity Image'}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
               </div>
 
               {/* Right Side: Content & Comments */}
-              <div className="w-full md:w-1/2 flex flex-col h-[50vh] md:h-[85vh] bg-[#0A1128]">
+              <div className="w-full md:w-1/2 flex flex-col h-[60vh] md:h-[85vh] bg-[#0A1128]">
                 {/* Header (Date, Title, Description) */}
-                <div className="p-6 border-b border-[#1E3A8A]/30 shrink-0">
+                <div className="p-4 md:p-6 border-b border-[#1E3A8A]/30 shrink-0">
                   <div className="flex flex-col gap-1.5">
                     <span className="text-xs md:text-sm text-cyan-400 font-medium tracking-wider uppercase mb-1">
                       {formatDate(selectedActivity.createdAt) || 'Belum ada tanggal'}
                     </span>
-                    <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight">{selectedActivity.title}</h2>
+                    <h2 className="text-xl md:text-3xl font-bold text-white leading-tight">{selectedActivity.title}</h2>
                     {selectedActivity.description && (
-                      <p className="text-slate-400 text-sm md:text-base mt-1 leading-relaxed">{selectedActivity.description}</p>
+                      <p className="text-slate-400 text-xs md:text-base mt-1 leading-relaxed">{selectedActivity.description}</p>
                     )}
                   </div>
                 </div>
 
-                {/* Comments List */}
-                <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-[#1E3A8A] scrollbar-track-transparent">
-                  <div className="flex items-center gap-2 text-cyan-400 font-semibold mb-2">
-                    <IconMessageCircle size={20} />
-                    <span>Komentar ({comments.length})</span>
-                  </div>
-                  
-                  {loadingComments ? (
-                    <div className="flex justify-center items-center py-8">
-                      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-400"></div>
-                    </div>
-                  ) : comments.length === 0 ? (
-                    <div className="text-center py-8 text-slate-500 italic">
-                      Belum ada komentar. Jadilah yang pertama!
-                    </div>
-                  ) : (
-                    comments.map((comment) => (
-                      <div key={comment.id} className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                        <div className="flex justify-between items-baseline mb-2">
-                          <span className="font-bold text-cyan-300">{comment.userName}</span>
-                          <span className="text-xs text-slate-500">{formatDate(comment.createdAt)}</span>
-                        </div>
-                        <p className="text-slate-300 text-sm leading-relaxed">{comment.content}</p>
-                      </div>
-                    ))
-                  )}
-                  <div ref={commentsEndRef} />
-                </div>
-
-                {/* Footer (Like & Comment Form) */}
-                <div className="p-4 sm:p-6 border-t border-[#1E3A8A]/30 bg-[#050A18] shrink-0">
-                  <div className="flex flex-col sm:flex-row items-center gap-3">
+                {/* Comment Form & Like Button (Moved here) */}
+                <div className="p-3 md:p-6 border-b border-[#1E3A8A]/30 bg-[#050A18] shrink-0">
+                  <div className="flex flex-row items-center gap-2">
                     {/* Like Button */}
                     <button 
                       type="button"
                       onClick={(e) => handleLike(selectedActivity.id, e)}
-                      className={`w-full sm:w-auto shrink-0 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl transition-all ${hasLiked[selectedActivity.id] ? 'bg-pink-500/20 text-pink-500 border border-pink-500/50' : 'bg-[#0A1128] text-slate-300 hover:bg-[#1E3A8A]/30 border border-[#1E3A8A]/50'}`}
+                      className={`shrink-0 flex items-center justify-center gap-1.5 px-3 py-2 md:px-4 md:py-2.5 rounded-xl transition-all ${hasLiked[selectedActivity.id] ? 'bg-pink-500/20 text-pink-500 border border-pink-500/50' : 'bg-[#0A1128] text-slate-300 hover:bg-[#1E3A8A]/30 border border-[#1E3A8A]/50'}`}
                     >
-                      {hasLiked[selectedActivity.id] ? <IconHeartFilled size={20} /> : <IconHeart size={20} />}
-                      <span className="font-bold text-sm">{localLikes[selectedActivity.id] !== undefined ? localLikes[selectedActivity.id] : (selectedActivity.likesCount || 0)}</span>
+                      {hasLiked[selectedActivity.id] ? <IconHeartFilled size={18} className="md:w-5 md:h-5" /> : <IconHeart size={18} className="md:w-5 md:h-5" />}
+                      <span className="font-bold text-xs md:text-sm">{localLikes[selectedActivity.id] !== undefined ? localLikes[selectedActivity.id] : (selectedActivity.likesCount || 0)}</span>
                     </button>
 
                     {/* Comment Form */}
-                    <form onSubmit={handleCommentSubmit} className="flex-1 flex flex-row gap-3 w-full">
+                    <form onSubmit={handleCommentSubmit} className="flex-1 flex flex-row gap-2 w-full">
                       <input
                         type="text"
                         placeholder="Nama..."
@@ -273,27 +245,56 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                         onChange={(e) => setNameInput(e.target.value)}
                         maxLength={50}
                         required
-                        className="w-1/3 min-w-22.5 bg-[#0A1128] border border-[#1E3A8A]/50 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
+                        className="w-1/4 min-w-[60px] md:min-w-[90px] md:w-1/3 bg-[#0A1128] border border-[#1E3A8A]/50 rounded-xl px-2.5 py-2 md:px-4 md:py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-[11px] md:text-sm"
                       />
                       <div className="relative flex-1">
                         <input
                           type="text"
-                          placeholder="Tulis komentar..."
+                          placeholder="Komentar..."
                           value={commentInput}
                           onChange={(e) => setCommentInput(e.target.value)}
                           required
-                          className="w-full bg-[#0A1128] border border-[#1E3A8A]/50 rounded-xl pl-4 pr-11 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
+                          className="w-full bg-[#0A1128] border border-[#1E3A8A]/50 rounded-xl pl-2.5 pr-7 py-2 md:pl-4 md:pr-11 md:py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-[11px] md:text-sm"
                         />
                         <button
                           type="submit"
                           disabled={isSubmitting || !nameInput.trim() || !commentInput.trim()}
-                          className="absolute right-1.5 top-1/2 -translate-y-1/2 p-1.5 bg-cyan-500 hover:bg-cyan-400 disabled:bg-slate-700 disabled:text-slate-500 text-white rounded-lg transition-colors"
+                          className="absolute right-1 top-1/2 -translate-y-1/2 p-1 md:p-1.5 bg-cyan-500 hover:bg-cyan-400 disabled:bg-slate-700 disabled:text-slate-500 text-white rounded-lg transition-colors"
                         >
-                          <IconSend size={16} />
+                          <IconSend size={14} className="md:w-4 md:h-4" />
                         </button>
                       </div>
                     </form>
                   </div>
+                </div>
+
+                {/* Comments List (Moved to bottom) */}
+                <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-[#1E3A8A] scrollbar-track-transparent">
+                  <div className="flex items-center gap-2 text-cyan-400 font-semibold mb-2">
+                    <IconMessageCircle size={18} className="md:w-5 md:h-5" />
+                    <span className="text-sm md:text-base">Komentar ({comments.length})</span>
+                  </div>
+                  
+                  {loadingComments ? (
+                    <div className="flex justify-center items-center py-8">
+                      <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-cyan-400"></div>
+                    </div>
+                  ) : comments.length === 0 ? (
+                    <div className="text-center py-8 text-slate-500 italic text-xs md:text-sm">
+                      Belum ada komentar. Jadilah yang pertama!
+                    </div>
+                  ) : (
+                    comments.map((comment) => (
+                      <div key={comment.id} className="bg-white/5 rounded-2xl p-3 md:p-4 border border-white/5">
+                        <div className="flex justify-between items-baseline mb-1.5 md:mb-2">
+                          <span className="font-bold text-cyan-300 text-sm md:text-base">{comment.userName}</span>
+                          <span className="text-[10px] md:text-xs text-slate-500">{formatDate(comment.createdAt)}</span>
+                        </div>
+                        <p className="text-slate-300 text-xs md:text-sm leading-relaxed">{comment.content}</p>
+                      </div>
+                    ))
+                  )}
+                  <div ref={commentsEndRef} />
                 </div>
               </div>
             </motion.div>
