@@ -70,6 +70,18 @@ async function main() {
       });
     }
 
+    // 5. Seed Activities (Galeri)
+    console.log("Memasukkan data Activities (Galeri)...");
+    const dummyActivities = [
+      { title: 'Laporan', description: 'Mengerjakan laporan proyek bulanan bersama tim.', imageUrl: '/assets/galery/laporan.jpeg' },
+      { title: 'Logbook', description: 'Mengisi logbook harian untuk dokumentasi kerja.', imageUrl: '/assets/galery/logbook.jpeg' },
+      { title: 'Foto Rafa', description: 'Sesi foto santai di sela-sela waktu istirahat.', imageUrl: '/assets/galery/rafa.jpg' },
+      { title: 'Twibbon', description: 'Pembuatan desain twibbon untuk acara kampus.', imageUrl: '/assets/galery/twibbon.png' },
+    ];
+    for (const activity of dummyActivities) {
+      await db.insert(schema.activities).values(activity);
+    }
+
     console.log("✅ Seeding database sukses! Semua data dari portfolio.ts sudah masuk ke Neon.");
   } catch (error) {
     console.error("❌ Terjadi kesalahan saat seeding:", error);

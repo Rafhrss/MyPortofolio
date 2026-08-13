@@ -211,13 +211,13 @@ export default function GallerySection({ initialActivities }: { initialActivitie
               <div className="w-full md:w-1/2 flex flex-col h-[50vh] md:h-[85vh] bg-[#0A1128]">
                 {/* Header (Date, Title, Description) */}
                 <div className="p-6 border-b border-[#1E3A8A]/30 shrink-0">
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[11px] text-cyan-400 font-medium tracking-wider uppercase mb-1">
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-xs md:text-sm text-cyan-400 font-medium tracking-wider uppercase mb-1">
                       {formatDate(selectedActivity.createdAt) || 'Belum ada tanggal'}
                     </span>
-                    <h2 className="text-2xl font-bold text-white leading-tight">{selectedActivity.title}</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight">{selectedActivity.title}</h2>
                     {selectedActivity.description && (
-                      <p className="text-slate-400 text-xs mt-1 leading-relaxed">{selectedActivity.description}</p>
+                      <p className="text-slate-400 text-sm md:text-base mt-1 leading-relaxed">{selectedActivity.description}</p>
                     )}
                   </div>
                 </div>
