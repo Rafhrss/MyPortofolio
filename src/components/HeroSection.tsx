@@ -58,19 +58,19 @@ export default function HeroSection() {
           {/* Social Media */}
           <div className="flex justify-center md:justify-start gap-4">
             <a
-              href="#"
+              href="https://github.com/Rafhrss" target="_blank" rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
             >
               <IconBrandGithub stroke={1.5} size={24} />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/rafhris._" target="_blank" rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
             >
               <IconBrandInstagram stroke={1.5} size={24} />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/rafa-haris-91b6a530a/" target="_blank" rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
             >
               <IconBrandLinkedin stroke={1.5} size={24} />

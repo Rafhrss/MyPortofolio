@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { IconHeart, IconHeartFilled, IconX, IconMessageCircle, IconSend } from '@tabler/icons-react';
 import { getComments, addComment, incrementLike } from '@/app/actions/gallery';
+import SpotlightCard from './SpotlightCard';
 
 export interface Activity {
   id: number;
@@ -141,9 +142,13 @@ export default function GallerySection({ initialActivities }: { initialActivitie
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
-            onClick={() => setSelectedActivity(item)}
-            className="break-inside-avoid relative group rounded-2xl overflow-hidden cursor-pointer bg-[#0A1128]/60 border border-[#1E3A8A]/30 shadow-lg"
+            className="break-inside-avoid"
           >
+            <SpotlightCard
+              onClick={() => setSelectedActivity(item)}
+              spotlightColor="rgba(0, 255, 220, 0.25)"
+              className="relative group rounded-2xl overflow-hidden cursor-pointer bg-[#0A1128]/60 border-[#1E3A8A]/30 shadow-lg !p-0"
+            >
             <Image 
               src={item.imageUrl} 
               alt={item.title || 'Gallery image'} 
@@ -167,6 +172,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                 </button>
               </div>
             </div>
+            </SpotlightCard>
           </motion.div>
         ))}
       </div>
