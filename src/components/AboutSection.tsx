@@ -1,4 +1,3 @@
-import React from 'react';
 import Lottie from './Lottie';
 
 export default function AboutSection() {

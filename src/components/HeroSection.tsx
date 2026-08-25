@@ -1,4 +1,3 @@
-import React from "react";
 import Lanyard from "@/components/Landyard";
 import TextType from "@/components/TextType";
 import { IconBrandGithub, IconBrandInstagram, IconBrandLinkedin } from "@tabler/icons-react";
