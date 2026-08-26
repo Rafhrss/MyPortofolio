@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import PortfolioShowcase from "@/components/PortfolioShowcase";
+import ContactSection from "@/components/ContactSection";
 import { db } from "@/db/db";
 import { techStack, projects, certificates, experiences } from "@/db/schema";
 import { desc } from "drizzle-orm";
@@ -36,6 +37,11 @@ export default async function Home() {
       {/* Experience Section */}
       <div className="relative pointer-events-auto">
         <ExperienceSection initialExperiences={experiencesData} />
+      </div>
+
+      {/* Contact Section */}
+      <div className="relative pointer-events-auto">
+        <ContactSection />
       </div>
     </div>
   );
