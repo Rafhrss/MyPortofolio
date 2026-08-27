@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { IconMail, IconBrandGithub, IconBrandInstagram, IconBrandYoutube, IconSend, IconUser, IconMessageCircle } from "@tabler/icons-react";
+import { IconSend, IconMessageCircle, IconMessageFilled } from "@tabler/icons-react";
+import { GitHubIcon, Instagram, Gmail, YouTube } from "@/components/ui/icons";
 
 const socialLinks = [
   {
-    icon: IconMail,
+    icon: Gmail,
     label: "Email",
     desc: '"rafaharis14@gmail.com" Drop me a message anytime, I will reply as soon as possible',
     href: "mailto:rafaharis14@gmail.com",
@@ -14,7 +15,7 @@ const socialLinks = [
     iconColor: "text-cyan-400",
   },
   {
-    icon: IconBrandGithub,
+    icon: GitHubIcon,
     label: "Github",
     desc: "Follow me on GitHub & check out my projects and repositories",
     href: "https://github.com/Rafhrss",
@@ -22,7 +23,7 @@ const socialLinks = [
     iconColor: "text-slate-300",
   },
   {
-    icon: IconBrandInstagram,
+    icon: Instagram,
     label: "Instagram",
     desc: "Follow me on Instagram to see my latest activity and moments",
     href: "https://www.instagram.com/rafhris._",
@@ -30,7 +31,7 @@ const socialLinks = [
     iconColor: "text-pink-400",
   },
   {
-    icon: IconBrandYoutube,
+    icon: YouTube,
     label: "Youtube",
     desc: "Follow me on YouTube to learn about IT and technology topics",
     href: "#",
@@ -99,7 +100,7 @@ export default function ContactSection() {
               className={`flex items-start gap-4 p-5 rounded-2xl bg-[#0A1128]/60 border border-[#1E3A8A]/40 ${link.color} transition-all duration-300 group`}
             >
               <div className={`shrink-0 p-2.5 rounded-xl bg-white/5 ${link.iconColor} group-hover:scale-110 transition-transform duration-300`}>
-                <link.icon size={22} />
+                <link.icon className="w-6 h-6" />
               </div>
               <div>
                 <p className="font-bold text-white text-sm">{link.label}</p>
@@ -119,7 +120,7 @@ export default function ContactSection() {
           <div className="bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center">
-                <IconUser size={18} className="text-cyan-400" />
+                <IconMessageFilled size={30} className="text-cyan-400" />
               </div>
               <h3 className="text-white font-semibold text-base">Leave a comment</h3>
             </div>
@@ -152,7 +153,7 @@ export default function ContactSection() {
 
           <div className="bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl p-6">
             <div className="flex items-center gap-2 text-cyan-400 font-semibold mb-4">
-              <IconMessageCircle size={18} />
+              <IconMessageCircle size={30} />
               <span className="text-sm">Comments ({dummyComments.length})</span>
             </div>
             <div className="flex flex-col gap-4">

@@ -1,6 +1,6 @@
 import Lanyard from "@/components/Landyard";
 import TextType from "@/components/TextType";
-import { IconBrandGithub, IconBrandInstagram, IconBrandLinkedin } from "@tabler/icons-react";
+import { GitHubIcon, Instagram, LinkedIn } from "@/components/ui/icons";
 
 export default function HeroSection() {
   return (
@@ -42,37 +42,25 @@ export default function HeroSection() {
             Tailwind CSS, and modern web technologies.
           </p>
 
-          {/* Tech Badges */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
-            {["React", "Javascript", "Python", "Tailwind"].map((tech) => (
-              <div
-                key={tech}
-                className="px-5 py-2 rounded-full border border-slate-700/50 bg-slate-800/50 text-slate-200 text-sm backdrop-blur-sm shadow-sm"
-              >
-                {tech}
-              </div>
-            ))}
-          </div>
-
           {/* Social Media */}
           <div className="flex justify-center md:justify-start gap-4">
             <a
               href="https://github.com/Rafhrss" target="_blank" rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
             >
-              <IconBrandGithub stroke={1.5} size={24} />
+              <GitHubIcon className="w-6 h-6" />
             </a>
             <a
               href="https://www.instagram.com/rafhris._" target="_blank" rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
             >
-              <IconBrandInstagram stroke={1.5} size={24} />
+              <Instagram className="w-6 h-6" />
             </a>
             <a
               href="https://www.linkedin.com/in/rafa-haris-91b6a530a/" target="_blank" rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
             >
-              <IconBrandLinkedin stroke={1.5} size={24} />
+              <LinkedIn className="w-6 h-6" />
             </a>
           </div>
         </div>
