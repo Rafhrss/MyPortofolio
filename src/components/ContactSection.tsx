@@ -74,7 +74,7 @@ export default function ContactSection() {
         >
           GET IN TOUCH
         </h2>
-        <p className="text-slate-400 text-lg max-w-2xl mx-auto mt-4">
+        <p className="text-slate-300 text-lg md:text-xl font-mono leading-relaxed max-w-2xl mx-auto mt-4">
           Have a project in mind or just want to say hi? Feel free to reach out!
         </p>
       </div>
@@ -103,8 +103,8 @@ export default function ContactSection() {
                 <link.icon className="w-6 h-6" />
               </div>
               <div>
-                <p className="font-bold text-white text-sm">{link.label}</p>
-                <p className="text-slate-400 text-sm mt-0.5 leading-relaxed">{link.desc}</p>
+                <p className="font-bold text-white text-base font-mono">{link.label}</p>
+                <p className="text-slate-300 text-sm font-mono mt-1 leading-relaxed">{link.desc}</p>
               </div>
             </motion.a>
           ))}

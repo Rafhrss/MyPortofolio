@@ -2,7 +2,7 @@ import Lottie from './Lottie';
 
 export default function AboutSection() {
   return (
-    <div id="about" className="w-full px-4 md:px-8 max-w-7xl mx-auto">
+    <div id="about" className="w-full px-4 md:px-8 md:pl-24 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex items-center justify-center md:justify-start gap-6 mb-10">
         <h2 
@@ -26,7 +26,7 @@ export default function AboutSection() {
         </div>
 
         {/* Text */}
-        <div className="space-y-6 text-slate-400 text-base md:text-xl leading-[1.8] font-sans text-center md:text-left">
+        <div className="space-y-6 text-slate-300 text-lg md:text-xl leading-relaxed font-mono text-center md:text-left">
           <p>
             Saya adalah mahasiswa Teknik Informatika di Universitas Muhammadiyah Kalimantan Timur yang memiliki minat besar dalam pengembangan Full Stack dan teknologi web modern. Saya selalu bersemangat untuk belajar hal baru dan menciptakan solusi digital yang inovatif.
           </p>

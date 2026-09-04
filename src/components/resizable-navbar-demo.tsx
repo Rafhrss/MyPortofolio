@@ -13,6 +13,10 @@ export default function NavbarDemo() {
       link: "/#about",
     },
     {
+      name: "Experience",
+      link: "/#experience",
+    },
+    {
       name: "Project",
       link: "/#project",
     },
@@ -32,7 +36,7 @@ export default function NavbarDemo() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton variant="primary">Contact</NavbarButton>
+            <NavbarButton href="/#contact" variant="primary">Contact</NavbarButton>
           </div>
         </NavBody>
 
@@ -62,6 +66,7 @@ export default function NavbarDemo() {
             ))}
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
+                href="/#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
                 className="w-full"
