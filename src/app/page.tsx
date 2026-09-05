@@ -4,8 +4,8 @@ import ExperienceSection from "@/components/ExperienceSection";
 import PortfolioShowcase from "@/components/PortfolioShowcase";
 import ContactSection from "@/components/ContactSection";
 import { db } from "@/db/db";
-import { techStack, projects, certificates, experiences } from "@/db/schema";
-import { desc } from "drizzle-orm";
+import { techStack, projects, certificates, experiences, comments } from "@/db/schema";
+import { desc, asc, isNull } from "drizzle-orm";
 
 export const revalidate = 0; // Ensure data is fetched fresh
 
@@ -14,6 +14,7 @@ export default async function Home() {
   const projectsData = await db.select().from(projects).orderBy(desc(projects.id));
   const certificatesData = await db.select().from(certificates).orderBy(desc(certificates.id));
   const experiencesData = await db.select().from(experiences).orderBy(desc(experiences.id));
+  const contactCommentsData = await db.select().from(comments).where(isNull(comments.activityId)).orderBy(asc(comments.id));
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
@@ -41,7 +42,7 @@ export default async function Home() {
 
       {/* Contact Section */}
       <div className="relative pointer-events-auto">
-        <ContactSection />
+        <ContactSection initialComments={contactCommentsData} />
       </div>
     </div>
   );

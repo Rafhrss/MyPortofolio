@@ -122,12 +122,12 @@ export default function PortfolioShowcase({
       </h2>
 
       {/* Tabs */}
-      <div className="flex flex-wrap justify-center p-2 bg-[#0A1128]/80 backdrop-blur-md rounded-2xl mb-12 border border-[#1E3A8A]/50 max-w-3xl w-full mx-auto relative gap-2 md:gap-0">
+      <div className="flex flex-nowrap justify-between p-1 md:p-2 bg-[#0A1128]/80 backdrop-blur-md rounded-2xl mb-12 border border-[#1E3A8A]/50 max-w-3xl w-full mx-auto relative gap-1 md:gap-0 overflow-x-auto custom-scrollbar">
         {(['projects', 'certificates', 'techStack'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 min-w-32.5 md:min-w-0 relative flex items-center justify-center gap-2 py-3 md:py-4 px-3 md:px-6 rounded-xl text-sm md:text-base font-bold transition-all duration-300 z-10 whitespace-nowrap
+            className={`flex-1 relative flex items-center justify-center gap-1.5 md:gap-2 py-2.5 md:py-4 px-2 md:px-6 rounded-xl text-xs sm:text-sm md:text-base font-bold transition-all duration-300 z-10 whitespace-nowrap
               ${activeTab === tab ? 'text-white' : 'text-slate-400 hover:text-white hover:bg-white/5'}
             `}
           >
@@ -138,9 +138,9 @@ export default function PortfolioShowcase({
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               />
             )}
-            {tab === 'projects' && <IconCode size={20} />}
-            {tab === 'certificates' && <IconHexagon size={20} />}
-            {tab === 'techStack' && <IconLayersOff size={20} />}
+            {tab === 'projects' && <IconCode className="w-4 h-4 md:w-5 md:h-5" />}
+            {tab === 'certificates' && <IconHexagon className="w-4 h-4 md:w-5 md:h-5" />}
+            {tab === 'techStack' && <IconLayersOff className="w-4 h-4 md:w-5 md:h-5" />}
             <span className="capitalize">{tab === 'techStack' ? 'Tech Stack' : tab}</span>
           </button>
         ))}

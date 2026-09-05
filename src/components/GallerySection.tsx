@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { IconHeart, IconHeartFilled, IconX, IconMessageCircle, IconSend } from '@tabler/icons-react';
 import { getComments, addComment, incrementLike } from '@/app/actions/gallery';
+import { likeComment } from '@/app/actions/likeComment';
 import SpotlightCard from './SpotlightCard';
 
 export interface Activity {
@@ -20,6 +21,7 @@ interface CommentData {
   userName: string;
   content: string;
   createdAt: Date | null;
+  likesCount?: number | null;
 }
 
 export default function GallerySection({ initialActivities }: { initialActivities?: Activity[] }) {
@@ -114,6 +116,16 @@ export default function GallerySection({ initialActivities }: { initialActivitie
     return new Intl.DateTimeFormat('id-ID', {
       day: 'numeric', month: 'short', year: 'numeric'
     }).format(new Date(date));
+  };
+
+  const handleCommentLike = async (commentId: number) => {
+    // Optimistic update
+    setComments(prev => 
+      prev.map(c => 
+        c.id === commentId ? { ...c, likesCount: (c.likesCount || 0) + 1 } : c
+      )
+    );
+    await likeComment(commentId, "/gallery");
   };
 
   return (
@@ -297,6 +309,15 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                           <span className="text-[10px] md:text-xs text-slate-500">{formatDate(comment.createdAt)}</span>
                         </div>
                         <p className="text-slate-300 text-xs md:text-sm leading-relaxed">{comment.content}</p>
+                        <div className="flex justify-end mt-2">
+                          <button
+                            onClick={() => handleCommentLike(comment.id)}
+                            className="flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-pink-500 transition-colors"
+                          >
+                            <IconHeart size={14} className={comment.likesCount ? "fill-pink-500 text-pink-500" : ""} />
+                            <span>{comment.likesCount || 0}</span>
+                          </button>
+                        </div>
                       </div>
                     ))
                   )}

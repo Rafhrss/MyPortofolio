@@ -58,9 +58,9 @@ export const activities = pgTable("activities", {
 export const comments = pgTable("comments", {
   id: serial("id").primaryKey(),
   activityId: integer("activity_id")
-    .references(() => activities.id, { onDelete: "cascade" }) // Relasi ke tabel activities
-    .notNull(),
+    .references(() => activities.id, { onDelete: "cascade" }), // Relasi ke tabel activities, boleh null untuk global comment
   userName: varchar("user_name", { length: 100 }).notNull(), // Nama pengunjung anonim/login
   content: text("content").notNull(),
+  likesCount: integer("likes_count").default(0), // Jumlah like pada komentar
   createdAt: timestamp("created_at").defaultNow(),
 });

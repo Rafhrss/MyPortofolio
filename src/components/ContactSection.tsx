@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { motion } from "framer-motion";
-import { IconSend, IconMessageCircle, IconMessageFilled } from "@tabler/icons-react";
+import { IconSend, IconMessageCircle, IconMessageFilled, IconLoader2, IconHeart } from "@tabler/icons-react";
 import { GitHubIcon, Instagram, Gmail, YouTube } from "@/components/ui/icons";
+import { addContactComment } from "@/app/actions/contact";
+import { likeComment } from "@/app/actions/likeComment";
 
 const socialLinks = [
   {
@@ -40,25 +42,30 @@ const socialLinks = [
   },
 ];
 
-const dummyComments = [
-  {
-    id: 1,
-    name: "Admin",
-    date: "25 Agu 2026, 17.30",
-    content: "Ini contoh kalau ada yang komen. Integrasinya nanti dulu.",
-    initials: "AD",
-  },
-];
+interface ContactComment {
+  id: number;
+  userName: string;
+  content: string;
+  createdAt: Date | null;
+  likesCount: number | null;
+}
 
-export default function ContactSection() {
+export default function ContactSection({ initialComments = [] }: { initialComments?: ContactComment[] }) {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
+  const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: integrate with database later
-    setName("");
-    setComment("");
+    startTransition(async () => {
+      const res = await addContactComment(name, comment);
+      if (res.success) {
+        setName("");
+        setComment("");
+      } else {
+        alert(res.error);
+      }
+    });
   };
 
   return (
@@ -122,7 +129,7 @@ export default function ContactSection() {
               <div className="w-9 h-9 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center">
                 <IconMessageFilled size={30} className="text-cyan-400" />
               </div>
-              <h3 className="text-white font-semibold text-base">Leave a comment</h3>
+              <h3 className="text-white font-semibold text-lg font-mono">Leave a comment</h3>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <input
@@ -131,7 +138,7 @@ export default function ContactSection() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full bg-[#050A18] border border-[#1E3A8A]/60 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
+                className="w-full bg-[#050A18] border border-[#1E3A8A]/60 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-base font-mono"
               />
               <textarea
                 placeholder="Write your comment..."
@@ -139,14 +146,15 @@ export default function ContactSection() {
                 onChange={(e) => setComment(e.target.value)}
                 required
                 rows={4}
-                className="w-full bg-[#050A18] border border-[#1E3A8A]/60 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm resize-none"
+                className="w-full bg-[#050A18] border border-[#1E3A8A]/60 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-base font-mono resize-none"
               />
               <button
                 type="submit"
-                className="self-end flex items-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-white font-semibold rounded-xl transition-colors text-sm"
+                disabled={isPending}
+                className="self-end flex items-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-white font-semibold rounded-xl transition-colors text-base font-mono"
               >
-                <IconSend size={16} />
-                Send
+                {isPending ? <IconLoader2 size={16} className="animate-spin" /> : <IconSend size={16} />}
+                {isPending ? "Sending..." : "Send"}
               </button>
             </form>
           </div>
@@ -154,23 +162,42 @@ export default function ContactSection() {
           <div className="bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl p-6">
             <div className="flex items-center gap-2 text-cyan-400 font-semibold mb-4">
               <IconMessageCircle size={30} />
-              <span className="text-sm">Comments ({dummyComments.length})</span>
+              <span className="text-base font-mono">Comments ({initialComments.length})</span>
             </div>
-            <div className="flex flex-col gap-4">
-              {dummyComments.map((c) => (
-                <div key={c.id} className="flex gap-3">
-                  <div className="shrink-0 w-9 h-9 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-cyan-400 text-xs font-bold">
-                    {c.initials}
-                  </div>
-                  <div className="flex-1 bg-white/5 rounded-xl p-3 border border-white/5">
-                    <div className="flex justify-between items-baseline mb-1">
-                      <span className="text-cyan-300 font-bold text-sm">{c.name}</span>
-                      <span className="text-[10px] text-slate-500">{c.date}</span>
+            <div className="flex flex-col gap-4 max-h-[260px] overflow-y-auto pr-2 custom-scrollbar">
+              {initialComments.length === 0 ? (
+                <p className="text-slate-500 text-sm font-mono italic text-center py-4">No comments yet. Be the first to say hi!</p>
+              ) : (
+                initialComments.map((c) => {
+                  const initials = c.userName.substring(0, 2).toUpperCase();
+                  const dateStr = c.createdAt 
+                    ? new Date(c.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) 
+                    : "";
+                  return (
+                    <div key={c.id} className="flex gap-3">
+                      <div className="shrink-0 w-9 h-9 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-cyan-400 text-xs font-bold uppercase">
+                        {initials}
+                      </div>
+                      <div className="flex-1 bg-white/5 rounded-xl p-3 border border-white/5">
+                        <div className="flex justify-between items-baseline mb-1">
+                          <span className="text-cyan-300 font-bold text-base font-mono">{c.userName}</span>
+                          <span className="text-[10px] font-mono text-slate-500">{dateStr}</span>
+                        </div>
+                        <p className="text-slate-300 text-sm font-mono leading-relaxed whitespace-pre-wrap">{c.content}</p>
+                        <div className="flex justify-end mt-2">
+                          <button
+                            onClick={async () => await likeComment(c.id, "/")}
+                            className="flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-pink-500 transition-colors"
+                          >
+                            <IconHeart size={14} className={c.likesCount ? "fill-pink-500 text-pink-500" : ""} />
+                            <span>{c.likesCount || 0}</span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-slate-300 text-sm leading-relaxed">{c.content}</p>
-                  </div>
-                </div>
-              ))}
+                  );
+                })
+              )}
             </div>
           </div>
         </motion.div>
