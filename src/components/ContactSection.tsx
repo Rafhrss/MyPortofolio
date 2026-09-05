@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { motion } from "framer-motion";
-import { IconSend, IconMessageCircle, IconMessageFilled, IconLoader2, IconHeart } from "@tabler/icons-react";
+import { IconSend, IconMessageCircle, IconMessageFilled, IconLoader2, IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import { GitHubIcon, Instagram, Gmail, YouTube } from "@/components/ui/icons";
 import { addContactComment } from "@/app/actions/contact";
 import { likeComment } from "@/app/actions/likeComment";
@@ -55,6 +55,21 @@ export default function ContactSection({ initialComments = [] }: { initialCommen
   const [comment, setComment] = useState("");
   const [isPending, startTransition] = useTransition();
 
+  const [localLikes, setLocalLikes] = useState<Record<number, number>>({});
+  const [hasLiked, setHasLiked] = useState<Record<number, boolean>>({});
+
+  const handleLike = (commentId: number, baseLikes: number) => {
+    // Optimistic UI update instantly
+    setHasLiked(prev => ({ ...prev, [commentId]: true }));
+    setLocalLikes(prev => {
+      const current = prev[commentId] !== undefined ? prev[commentId] : baseLikes;
+      return { ...prev, [commentId]: current + 1 };
+    });
+    
+    // Send to server in background
+    likeComment(commentId, "/").catch(console.error);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     startTransition(async () => {
@@ -81,9 +96,6 @@ export default function ContactSection({ initialComments = [] }: { initialCommen
         >
           GET IN TOUCH
         </h2>
-        <p className="text-slate-300 text-lg md:text-xl font-mono leading-relaxed max-w-2xl mx-auto mt-4">
-          Have a project in mind or just want to say hi? Feel free to reach out!
-        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -94,6 +106,9 @@ export default function ContactSection({ initialComments = [] }: { initialCommen
           transition={{ duration: 0.6 }}
           className="flex flex-col gap-4"
         >
+          <p className="text-slate-300 text-lg md:text-xl font-mono leading-relaxed mb-2">
+            Have a project in mind or just want to say hi? Feel free to reach out!
+          </p>
           {socialLinks.map((link, i) => (
             <motion.a
               key={link.label}
@@ -164,7 +179,7 @@ export default function ContactSection({ initialComments = [] }: { initialCommen
               <IconMessageCircle size={30} />
               <span className="text-base font-mono">Comments ({initialComments.length})</span>
             </div>
-            <div className="flex flex-col gap-4 max-h-[260px] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="flex flex-col gap-4 max-h-65 overflow-y-auto pr-2 custom-scrollbar">
               {initialComments.length === 0 ? (
                 <p className="text-slate-500 text-sm font-mono italic text-center py-4">No comments yet. Be the first to say hi!</p>
               ) : (
@@ -179,20 +194,25 @@ export default function ContactSection({ initialComments = [] }: { initialCommen
                         {initials}
                       </div>
                       <div className="flex-1 bg-white/5 rounded-xl p-3 border border-white/5">
-                        <div className="flex justify-between items-baseline mb-1">
-                          <span className="text-cyan-300 font-bold text-base font-mono">{c.userName}</span>
-                          <span className="text-[10px] font-mono text-slate-500">{dateStr}</span>
-                        </div>
-                        <p className="text-slate-300 text-sm font-mono leading-relaxed whitespace-pre-wrap">{c.content}</p>
-                        <div className="flex justify-end mt-2">
+                        <div className="float-right flex flex-col items-end ml-1.5 mb-1">
+                          <span className="text-[10px] font-mono text-slate-500 whitespace-nowrap">{dateStr}</span>
                           <button
-                            onClick={async () => await likeComment(c.id, "/")}
-                            className="flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-pink-500 transition-colors"
+                            onClick={() => handleLike(c.id, c.likesCount || 0)}
+                            className="flex items-center gap-1.5 text-sm font-mono text-slate-400 hover:text-pink-500 transition-colors mt-1.5"
                           >
-                            <IconHeart size={14} className={c.likesCount ? "fill-pink-500 text-pink-500" : ""} />
-                            <span>{c.likesCount || 0}</span>
+                            {hasLiked[c.id] || c.likesCount ? (
+                              <IconHeartFilled size={18} className="text-pink-500" />
+                            ) : (
+                              <IconHeart size={18} />
+                            )}
+                            <span className={hasLiked[c.id] ? "text-pink-500" : ""}>
+                              {localLikes[c.id] !== undefined ? localLikes[c.id] : (c.likesCount || 0)}
+                            </span>
                           </button>
                         </div>
+                        <span className="text-cyan-300 font-bold text-base font-mono block mb-1">{c.userName}</span>
+                        <p className="text-slate-300 text-sm font-mono leading-relaxed whitespace-pre-wrap wrap-break-word">{c.content}</p>
+                        <div className="clear-both"></div>
                       </div>
                     </div>
                   );

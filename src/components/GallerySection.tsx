@@ -88,8 +88,15 @@ export default function GallerySection({ initialActivities }: { initialActivitie
   const handleLike = async (activityId: number, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent opening modal if clicked from outside
 
+    // Get current likes from DB as base if local state is empty
+    const targetActivity = galleryItems.find(a => a.id === activityId);
+    const baseLikes = targetActivity?.likesCount || 0;
+
     // Optimistic UI update
-    setLocalLikes(prev => ({ ...prev, [activityId]: (prev[activityId] || 0) + 1 }));
+    setLocalLikes(prev => {
+      const current = prev[activityId] !== undefined ? prev[activityId] : baseLikes;
+      return { ...prev, [activityId]: current + 1 };
+    });
     setHasLiked(prev => ({ ...prev, [activityId]: true }));
 
     // Send to server
@@ -231,12 +238,12 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                 {/* Header (Date, Title, Description) */}
                 <div className="p-4 md:p-6 border-b border-[#1E3A8A]/30 shrink-0">
                   <div className="flex flex-col gap-1.5">
-                    <span className="text-xs md:text-sm text-cyan-400 font-medium tracking-wider uppercase mb-1">
+                    <span className="text-sm text-cyan-400 font-mono tracking-wider uppercase mb-1">
                       {formatDate(selectedActivity.createdAt) || 'Belum ada tanggal'}
                     </span>
-                    <h2 className="text-xl md:text-3xl font-bold text-white leading-tight">{selectedActivity.title}</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold text-white font-mono leading-tight">{selectedActivity.title}</h2>
                     {selectedActivity.description && (
-                      <p className="text-slate-400 text-xs md:text-base mt-1 leading-relaxed">{selectedActivity.description}</p>
+                      <p className="text-slate-400 text-sm md:text-base font-mono mt-1 leading-relaxed">{selectedActivity.description}</p>
                     )}
                   </div>
                 </div>
@@ -251,7 +258,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                       className={`shrink-0 flex items-center justify-center gap-1.5 px-3 py-2 md:px-4 md:py-2.5 rounded-xl transition-all ${hasLiked[selectedActivity.id] ? 'bg-pink-500/20 text-pink-500 border border-pink-500/50' : 'bg-[#0A1128] text-slate-300 hover:bg-[#1E3A8A]/30 border border-[#1E3A8A]/50'}`}
                     >
                       {hasLiked[selectedActivity.id] ? <IconHeartFilled size={18} className="md:w-5 md:h-5" /> : <IconHeart size={18} className="md:w-5 md:h-5" />}
-                      <span className="font-bold text-xs md:text-sm">{localLikes[selectedActivity.id] !== undefined ? localLikes[selectedActivity.id] : (selectedActivity.likesCount || 0)}</span>
+                      <span className="font-bold font-mono text-sm md:text-base">{localLikes[selectedActivity.id] !== undefined ? localLikes[selectedActivity.id] : (selectedActivity.likesCount || 0)}</span>
                     </button>
 
                     {/* Comment Form */}
@@ -263,7 +270,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                         onChange={(e) => setNameInput(e.target.value)}
                         maxLength={50}
                         required
-                        className="w-1/4 min-w-15 md:min-w-22.5 md:w-1/3 bg-[#0A1128] border border-[#1E3A8A]/50 rounded-xl px-2.5 py-2 md:px-4 md:py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-[11px] md:text-sm"
+                        className="w-1/4 min-w-15 md:min-w-22.5 md:w-1/3 bg-[#0A1128] border border-[#1E3A8A]/50 rounded-xl px-2.5 py-2 md:px-4 md:py-2.5 text-white placeholder-slate-500 font-mono focus:outline-none focus:border-cyan-400 transition-colors text-sm"
                       />
                       <div className="relative flex-1">
                         <input
@@ -272,14 +279,14 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                           value={commentInput}
                           onChange={(e) => setCommentInput(e.target.value)}
                           required
-                          className="w-full bg-[#0A1128] border border-[#1E3A8A]/50 rounded-xl pl-2.5 pr-7 py-2 md:pl-4 md:pr-11 md:py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors text-[11px] md:text-sm"
+                          className="w-full bg-[#0A1128] border border-[#1E3A8A]/50 rounded-xl pl-2.5 pr-7 py-2 md:pl-4 md:pr-11 md:py-2.5 text-white placeholder-slate-500 font-mono focus:outline-none focus:border-cyan-400 transition-colors text-sm"
                         />
                         <button
                           type="submit"
                           disabled={isSubmitting || !nameInput.trim() || !commentInput.trim()}
                           className="absolute right-1 top-1/2 -translate-y-1/2 p-1 md:p-1.5 bg-cyan-500 hover:bg-cyan-400 disabled:bg-slate-700 disabled:text-slate-500 text-white rounded-lg transition-colors"
                         >
-                          <IconSend size={14} className="md:w-4 md:h-4" />
+                          <IconSend size={16} className="md:w-4 md:h-4" />
                         </button>
                       </div>
                     </form>
@@ -290,7 +297,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                 <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-[#1E3A8A] scrollbar-track-transparent">
                   <div className="flex items-center gap-2 text-cyan-400 font-semibold mb-2">
                     <IconMessageCircle size={18} className="md:w-5 md:h-5" />
-                    <span className="text-sm md:text-base">Komentar ({comments.length})</span>
+                    <span className="text-base font-mono font-bold">Komentar ({comments.length})</span>
                   </div>
                   
                   {loadingComments ? (
@@ -304,20 +311,23 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                   ) : (
                     comments.map((comment) => (
                       <div key={comment.id} className="bg-white/5 rounded-2xl p-3 md:p-4 border border-white/5">
-                        <div className="flex justify-between items-baseline mb-1.5 md:mb-2">
-                          <span className="font-bold text-cyan-300 text-sm md:text-base">{comment.userName}</span>
-                          <span className="text-[10px] md:text-xs text-slate-500">{formatDate(comment.createdAt)}</span>
-                        </div>
-                        <p className="text-slate-300 text-xs md:text-sm leading-relaxed">{comment.content}</p>
-                        <div className="flex justify-end mt-2">
+                        <div className="float-right flex flex-col items-end ml-1.5 mb-1">
+                          <span className="text-[10px] font-mono text-slate-500 whitespace-nowrap">{formatDate(comment.createdAt)}</span>
                           <button
                             onClick={() => handleCommentLike(comment.id)}
-                            className="flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-pink-500 transition-colors"
+                            className="flex items-center gap-1.5 text-sm font-mono text-slate-400 hover:text-pink-500 transition-colors mt-1.5"
                           >
-                            <IconHeart size={14} className={comment.likesCount ? "fill-pink-500 text-pink-500" : ""} />
-                            <span>{comment.likesCount || 0}</span>
+                            {comment.likesCount ? (
+                              <IconHeartFilled size={18} className="text-pink-500" />
+                            ) : (
+                              <IconHeart size={18} />
+                            )}
+                            <span className={comment.likesCount ? "text-pink-500" : ""}>{comment.likesCount || 0}</span>
                           </button>
                         </div>
+                        <span className="text-cyan-300 font-bold text-base font-mono block mb-1">{comment.userName}</span>
+                        <p className="text-slate-300 text-sm font-mono leading-relaxed whitespace-pre-wrap break-words">{comment.content}</p>
+                        <div className="clear-both"></div>
                       </div>
                     ))
                   )}
