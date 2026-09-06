@@ -106,7 +106,7 @@ export default function ContactSection({ initialComments = [] }: { initialCommen
           transition={{ duration: 0.6 }}
           className="flex flex-col gap-4"
         >
-          <p className="text-slate-300 text-lg md:text-xl font-mono leading-relaxed mb-2">
+          <p className="text-slate-300 text-lg md:text-xl font-mono leading-relaxed mb-2 text-center">
             Have a project in mind or just want to say hi? Feel free to reach out!
           </p>
           {socialLinks.map((link, i) => (

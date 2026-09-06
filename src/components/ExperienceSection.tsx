@@ -65,14 +65,16 @@ export default function ExperienceSection({ initialExperiences = [] }: Experienc
             spotlightColor="rgba(20, 223, 224, 0.8)"
             className="w-full bg-[#0A1128]/80 border border-[#1E3A8A]/40 rounded-2xl p-6 md:p-8 flex flex-col items-start text-left shadow-lg cursor-pointer hover:border-cyan-500/50 transition-colors duration-300"
           >
-            <div className="flex items-center gap-3 mb-2 w-full">
-              <span className="p-2 rounded-lg bg-cyan-950/50 text-cyan-400 border border-cyan-900/50">
-                <IconBriefcase size={18} />
-              </span>
-              <h3 className="text-xl md:text-2xl font-bold text-white flex-1">
-                {exp.title} <span className="text-cyan-400">{exp.highlight}</span>
-              </h3>
-              <span className="flex items-center gap-1.5 text-slate-400 text-sm font-medium shrink-0">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 mb-2 w-full">
+              <div className="flex items-center gap-3 flex-1">
+                <span className="p-2 rounded-lg bg-cyan-950/50 text-cyan-400 border border-cyan-900/50 shrink-0">
+                  <IconBriefcase size={18} />
+                </span>
+                <h3 className="text-xl md:text-2xl font-bold text-white">
+                  {exp.title} <span className="text-cyan-400">{exp.highlight}</span>
+                </h3>
+              </div>
+              <span className="flex items-center gap-1.5 text-slate-400 text-sm font-medium md:shrink-0 pl-11 md:pl-0">
                 <IconCalendar size={14} />
                 {exp.date}
               </span>

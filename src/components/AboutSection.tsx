@@ -28,10 +28,10 @@ export default function AboutSection() {
         {/* Text */}
         <div className="space-y-6 text-slate-300 text-lg md:text-xl leading-relaxed font-mono text-center md:text-left">
           <p>
-            Saya adalah mahasiswa Teknik Informatika di Universitas Muhammadiyah Kalimantan Timur yang memiliki minat besar dalam pengembangan Full Stack dan teknologi web modern. Saya selalu bersemangat untuk belajar hal baru dan menciptakan solusi digital yang inovatif.
+            Saya <span className="text-[#00ffdc]">Rafa Haris</span> mahasiswa Teknik Informatika di Universitas Muhammadiyah Kalimantan Timur yang memiliki minat besar dalam pengembangan Full Stack dan teknologi web modern. Saya selalu bersemangat untuk belajar hal baru dan menciptakan solusi digital yang inovatif.
           </p>
           <p>
-            Saya memiliki minat yang besar dalam bidang teknologi dan senantiasa berupaya untuk terus mengembangkan keahlian serta memperdalam pengetahuan saya di bidang ini.
+            Fokus pada <span className="text-[#00ffdc]">Full-Stack Web Development</span> dengan keunggulan pemahaman mendalam di sisi <span className="text-[#00ffdc]">Infrastruktur Jaringan & Server</span>.
           </p>
         </div>
       </div>

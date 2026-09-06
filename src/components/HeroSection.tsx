@@ -38,8 +38,7 @@ export default function HeroSection() {
 
           {/* Description */}
           <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-xl font-mono leading-relaxed">
-            I craft responsive and visually engaging websites using React,
-            Tailwind CSS, and modern web technologies.
+            Building business-driven full-stack web solutions with modern technologies like Next.js & ORM databases, backed by hands-on IT infrastructure and network engineering experience in switching, routing, cabling and server deployment.
           </p>
 
           {/* Social Media */}

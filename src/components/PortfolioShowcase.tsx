@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { IconCode, IconHexagon, IconLayersOff, IconExternalLink, IconX, IconDownload } from '@tabler/icons-react';
+import { IconCode, IconHexagon, IconLayersOff, IconExternalLink, IconX } from '@tabler/icons-react';
 
 // Removed static data import: import { projects, certificates, techStack as fallbackTechStack } from '@/data/portfolio';
 import * as Icons from '@/components/ui/icons';
@@ -376,7 +376,7 @@ export default function PortfolioShowcase({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
+            className="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-6"
             onClick={() => setSelectedCert(null)}
           >
             <div className="absolute inset-0 bg-black/80" />
