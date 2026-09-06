@@ -52,8 +52,12 @@ export default function GallerySection({ initialActivities }: { initialActivitie
 
   // Fetch comments when modal opens
   useEffect(() => {
+    const navbar = document.getElementById('global-navbar');
+    
     if (selectedActivity) {
       document.body.style.overflow = 'hidden';
+      if (navbar) navbar.style.display = 'none'; // Sembunyikan navbar
+      
       const fetchComments = async () => {
         setComments([]); // Clear existing comments immediately
         setLoadingComments(true);
@@ -66,6 +70,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
       fetchComments();
     } else {
       document.body.style.overflow = 'unset';
+      if (navbar) navbar.style.display = ''; // Munculkan kembali
     }
 
     const handleEsc = (e: KeyboardEvent) => {
@@ -74,6 +79,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
     window.addEventListener('keydown', handleEsc);
     return () => {
       document.body.style.overflow = 'unset';
+      if (navbar) navbar.style.display = ''; // Pastikan muncul kembali saat unmount
       window.removeEventListener('keydown', handleEsc);
     };
   }, [selectedActivity]);
@@ -204,7 +210,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedActivity(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/80"
+            className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6 md:p-12 bg-black/80"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}

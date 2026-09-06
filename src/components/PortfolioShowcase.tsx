@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { IconCode, IconHexagon, IconLayersOff, IconExternalLink, IconX } from '@tabler/icons-react';
+import { IconCode, IconHexagon, IconLayersOff, IconExternalLink, IconX, IconDownload } from '@tabler/icons-react';
 
 // Removed static data import: import { projects, certificates, techStack as fallbackTechStack } from '@/data/portfolio';
 import * as Icons from '@/components/ui/icons';
@@ -76,8 +76,10 @@ export default function PortfolioShowcase({
   const [activeTab, setActiveTab] = useState<'projects' | 'certificates' | 'techStack'>('projects');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedCert, setSelectedCert] = useState<any>(null);
 
-  // Prevent scrolling and hide navbar when modal is open
+  // Prevent scrolling and hide navbar when project modal is open
   useEffect(() => {
     const navbar = document.getElementById('global-navbar');
     if (selectedProject) {
@@ -104,6 +106,27 @@ export default function PortfolioShowcase({
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [selectedProject]);
+
+  // Prevent scrolling and hide navbar when cert modal is open
+  useEffect(() => {
+    const navbar = document.getElementById('global-navbar');
+    if (selectedCert) {
+      document.body.style.overflow = 'hidden';
+      if (navbar) navbar.style.transform = 'translateY(-150%)';
+    } else {
+      document.body.style.overflow = 'unset';
+      if (navbar) navbar.style.transform = '';
+    }
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedCert(null);
+    };
+    if (selectedCert) window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = 'unset';
+      if (navbar) navbar.style.transform = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedCert]);
 
   return (
     // max-w-7xl untuk melebarkan showcase
@@ -183,35 +206,35 @@ export default function PortfolioShowcase({
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {currentCertificates.map((cert) => {
-                const url = cert.image?.startsWith('http') ? cert.image : (cert.image?.startsWith('/') ? cert.image : `/${cert.image || ''}`);
+                // Get the file URL from DB
+                const fileUrl = cert.image?.startsWith('http') ? cert.image : (cert.image?.startsWith('/') ? cert.image : `/${cert.image || ''}`);
+                // Derive thumbnail: for PDFs replace extension with .png, otherwise use file directly
+                const isPdf = cert.image?.toLowerCase().endsWith('.pdf');
+                const thumbUrl = isPdf ? fileUrl.replace(/\.pdf$/i, '.png') : fileUrl;
                 return (
-                <a href={url} target="_blank" rel="noopener noreferrer" key={cert.id} className="block bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl overflow-hidden group hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)] transition-all duration-300 shadow-lg cursor-pointer">
-                  <div className="h-52 relative overflow-hidden bg-slate-800 flex items-center justify-center">
-                    {cert.image?.toLowerCase().endsWith('.pdf') ? (
-                      <div className="w-full h-full relative overflow-hidden pointer-events-none bg-white">
-                        <iframe 
-                          src={`${url}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} 
-                          className="w-full h-[150%] -mt-10 border-none group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" 
-                          title={cert.title}
-                        />
+                  <div
+                    key={cert.id}
+                    onClick={() => setSelectedCert({ ...cert, fileUrl, thumbUrl, isPdf })}
+                    className="block bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl overflow-hidden group hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)] transition-all duration-300 shadow-lg cursor-pointer"
+                  >
+                    <div className="h-52 relative overflow-hidden bg-slate-800">
+                      <Image fill src={thumbUrl} alt={cert.title} className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
+                      <div className="absolute top-4 right-4 bg-emerald-500/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg z-10">
+                        {cert.date}
                       </div>
-                    ) : (
-                      <Image fill src={url} alt={cert.title} className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
-                    )}
-                    <div className="absolute top-4 right-4 bg-emerald-500/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg z-10">
-                      {cert.date}
+                      <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-sm text-slate-300 text-[10px] uppercase tracking-wider font-semibold px-3 py-1.5 rounded-full border border-slate-700/50 shadow-lg z-10">
+                        {cert.issuer}
+                      </div>
                     </div>
-                    <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-sm text-slate-300 text-[10px] uppercase tracking-wider font-semibold px-3 py-1.5 rounded-full border border-slate-700/50 shadow-lg z-10">
-                      {cert.issuer}
+                    <div className="p-5 bg-[#0A1128]">
+                      <h3 className="text-base font-bold text-slate-100 line-clamp-2 leading-snug group-hover:text-cyan-400 transition-colors">{cert.title}</h3>
                     </div>
                   </div>
-                  <div className="p-6 flex flex-col gap-4 bg-[#0A1128]">
-                    <h3 className="text-lg font-bold text-slate-100 line-clamp-2 leading-snug group-hover:text-cyan-400 transition-colors">{cert.title}</h3>
-                  </div>
-                </a>
-              )})}
+                );
+              })}
             </motion.div>
           )}
+
 
           {/* TECH STACK TAB */}
           {activeTab === 'techStack' && (
@@ -339,6 +362,59 @@ export default function PortfolioShowcase({
                     <Icons.GitHubIcon className="w-8" />
                     Source Code
                   </a>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Certificate Modal */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
+            onClick={() => setSelectedCert(null)}
+          >
+            <div className="absolute inset-0 bg-black/80" />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 40 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 40 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-4xl bg-[#0F172A] rounded-3xl border border-slate-700/50 shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[92vh] md:max-h-[85vh]"
+            >
+              {/* Image (clickable → opens file in new tab) */}
+              <a
+                href={selectedCert.fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-3/5 relative bg-slate-900 flex items-center justify-center cursor-pointer overflow-hidden"
+                style={{ minHeight: '240px' }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Image
+                  src={selectedCert.thumbUrl}
+                  alt={selectedCert.title}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </a>
+              <div className="w-full md:w-2/5 p-6 flex flex-col gap-4 bg-[#0F172A]">
+                <span className="text-xs font-bold uppercase tracking-widest text-cyan-400">{selectedCert.issuer}</span>
+                <h2 className="text-xl md:text-2xl font-bold text-white leading-tight">{selectedCert.title}</h2>
+                {/* Date + Tutup side by side */}
+                <div className="flex items-center justify-between">
+                  <p className="text-slate-400 text-sm">{selectedCert.date}</p>
+                  <button
+                    onClick={() => setSelectedCert(null)}
+                    className="py-1.5 px-4 rounded-lg text-xs font-bold bg-red-500/80 hover:bg-red-600 text-white transition-colors border border-red-400/50"
+                  >
+                    Tutup
+                  </button>
                 </div>
               </div>
             </motion.div>
