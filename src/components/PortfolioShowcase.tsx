@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { IconCode, IconHexagon, IconLayersOff, IconExternalLink, IconX, IconDownload } from '@tabler/icons-react';
+import { IconCode, IconHexagon, IconLayersOff, IconExternalLink, IconX } from '@tabler/icons-react';
 
 // Removed static data import: import { projects, certificates, techStack as fallbackTechStack } from '@/data/portfolio';
 import * as Icons from '@/components/ui/icons';
@@ -182,26 +182,34 @@ export default function PortfolioShowcase({
               transition={{ duration: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {currentCertificates.map((cert) => (
-                <div key={cert.id} className="bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl overflow-hidden group hover:border-[#1E3A8A] transition-all duration-300 shadow-lg">
-                  <div className="h-52 relative overflow-hidden bg-slate-800">
-                    <Image fill src={cert.image?.startsWith('http') ? cert.image : (cert.image?.startsWith('/') ? cert.image : `/${cert.image || ''}`)} alt={cert.title} className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
-                    <div className="absolute top-4 right-4 bg-emerald-500/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+              {currentCertificates.map((cert) => {
+                const url = cert.image?.startsWith('http') ? cert.image : (cert.image?.startsWith('/') ? cert.image : `/${cert.image || ''}`);
+                return (
+                <a href={url} target="_blank" rel="noopener noreferrer" key={cert.id} className="block bg-[#0A1128]/60 border border-[#1E3A8A]/40 rounded-2xl overflow-hidden group hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)] transition-all duration-300 shadow-lg cursor-pointer">
+                  <div className="h-52 relative overflow-hidden bg-slate-800 flex items-center justify-center">
+                    {cert.image?.toLowerCase().endsWith('.pdf') ? (
+                      <div className="w-full h-full relative overflow-hidden pointer-events-none bg-white">
+                        <iframe 
+                          src={`${url}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} 
+                          className="w-full h-[150%] -mt-10 border-none group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" 
+                          title={cert.title}
+                        />
+                      </div>
+                    ) : (
+                      <Image fill src={url} alt={cert.title} className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
+                    )}
+                    <div className="absolute top-4 right-4 bg-emerald-500/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg z-10">
                       {cert.date}
                     </div>
-                    <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-sm text-slate-300 text-[10px] uppercase tracking-wider font-semibold px-3 py-1.5 rounded-full border border-slate-700/50 shadow-lg">
+                    <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-sm text-slate-300 text-[10px] uppercase tracking-wider font-semibold px-3 py-1.5 rounded-full border border-slate-700/50 shadow-lg z-10">
                       {cert.issuer}
                     </div>
                   </div>
                   <div className="p-6 flex flex-col gap-4 bg-[#0A1128]">
-                    <h3 className="text-lg font-bold text-slate-100 line-clamp-2 leading-snug">{cert.title}</h3>
-                    <button className="flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-cyan-400 transition-colors w-fit mt-2">
-                      <IconDownload size={18} />
-                      <span>View Certificate</span>
-                    </button>
+                    <h3 className="text-lg font-bold text-slate-100 line-clamp-2 leading-snug group-hover:text-cyan-400 transition-colors">{cert.title}</h3>
                   </div>
-                </div>
-              ))}
+                </a>
+              )})}
             </motion.div>
           )}
 

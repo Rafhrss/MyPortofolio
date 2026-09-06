@@ -3,6 +3,7 @@ import AboutSection from "@/components/AboutSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import PortfolioShowcase from "@/components/PortfolioShowcase";
 import ContactSection from "@/components/ContactSection";
+import { AudioPlayer } from "@/components/ui/AudioPlayer";
 import { db } from "@/db/db";
 import { techStack, projects, certificates, experiences, comments } from "@/db/schema";
 import { desc, asc, isNull } from "drizzle-orm";
@@ -43,6 +44,11 @@ export default async function Home() {
       {/* Contact Section */}
       <div className="relative pointer-events-auto">
         <ContactSection initialComments={contactCommentsData} />
+      </div>
+
+      {/* Floating Audio Player */}
+      <div className="fixed bottom-4 left-4 z-50 md:bottom-8 md:left-8 pointer-events-auto shadow-2xl">
+        <AudioPlayer audioSrc="/music/Steve Lacy oh yeah.mp3" />
       </div>
     </div>
   );

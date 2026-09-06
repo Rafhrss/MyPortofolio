@@ -36,7 +36,7 @@ const socialLinks = [
     icon: YouTube,
     label: "Youtube",
     desc: "Follow me on YouTube to learn about IT and technology topics",
-    href: "#",
+    href: "https://www.youtube.com/@it-tempest",
     color: "hover:border-red-400/60",
     iconColor: "text-red-400",
   },

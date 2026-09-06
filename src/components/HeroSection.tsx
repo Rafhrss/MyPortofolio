@@ -43,25 +43,29 @@ export default function HeroSection() {
           </p>
 
           {/* Social Media */}
-          <div className="flex justify-center md:justify-start gap-4">
-            <a
-              href="https://github.com/Rafhrss" target="_blank" rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
-            >
-              <GitHubIcon className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.instagram.com/rafhris._" target="_blank" rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
-            >
-              <Instagram className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/rafa-haris-91b6a530a/" target="_blank" rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
-            >
-              <LinkedIn className="w-6 h-6" />
-            </a>
+          <div className="flex flex-col gap-6 w-full max-w-xl">
+            <div className="flex justify-center md:justify-start gap-4">
+              <a
+                href="https://github.com/Rafhrss" target="_blank" rel="noopener noreferrer"
+                className="w-14 h-14 rounded-full bg-slate-800/50 border border-white/20 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
+              >
+                <GitHubIcon className="w-7 h-7" />
+              </a>
+              <a
+                href="https://www.instagram.com/rafhris._" target="_blank" rel="noopener noreferrer"
+                className="w-14 h-14 rounded-full bg-slate-800/50 border border-white/20 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
+              >
+                <Instagram className="w-7 h-7" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/rafa-haris-91b6a530a/" target="_blank" rel="noopener noreferrer"
+                className="w-14 h-14 rounded-full bg-slate-800/50 border border-white/20 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 hover:scale-110 transition-all duration-300 backdrop-blur-sm shadow-sm cursor-pointer"
+              >
+                <LinkedIn className="w-7 h-7" />
+              </a>
+            </div>
+
+
           </div>
         </div>
         {/* hidden md:flex membuat Landyard hilang saat mobile */}
