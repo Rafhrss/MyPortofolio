@@ -6,23 +6,23 @@ export default function NavbarDemo() {
   const navItems = [
     {
       name: "Home",
-      link: "/",
+      link: "/#",
     },
     {
       name: "About",
       link: "/#about",
     },
     {
-      name: "Experience",
-      link: "/#experience",
-    },
-    {
       name: "Project",
       link: "/#project",
     },
     {
-      name: "Galery",
-      link: "/gallery",
+      name: "Experience",
+      link: "/#experience",
+    },
+    {
+      name: "Contact",
+      link: "/#contact",
     },
   ];
 
@@ -36,7 +36,7 @@ export default function NavbarDemo() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton href="/#contact" variant="primary">Contact</NavbarButton>
+            <NavbarButton href="/gallery" variant="primary">Gallery</NavbarButton>
           </div>
         </NavBody>
 
@@ -54,30 +54,30 @@ export default function NavbarDemo() {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {navItems.map((item, idx) => (
-              <a
-                key={`mobile-link-${idx}`}
-                href={item.link}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-white! hover:text-cyan-400 transition-colors text-lg! font-bold! py-2 font-sans!"
-              >
-                <span className="block">{item.name}</span>
-              </a>
-            ))}
+            <div className="grid grid-cols-2 gap-y-4 gap-x-2 w-full mb-4">
+              {navItems.map((item, idx) => (
+                <a
+                  key={`mobile-link-${idx}`}
+                  href={item.link}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="relative text-white! hover:text-cyan-400 transition-colors text-sm! font-medium! py-2 font-mono!"
+                >
+                  <span className="block">{item.name}</span>
+                </a>
+              ))}
+            </div>
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
-                href="/#contact"
+                href="/gallery"
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
-                className="w-full"
-              >
-                Contact
+                className="w-full">
+                  Gallery
               </NavbarButton>
             </div>
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-
       {/* Navbar */}
     </div>
   );

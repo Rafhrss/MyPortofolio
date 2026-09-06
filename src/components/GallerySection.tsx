@@ -211,19 +211,19 @@ export default function GallerySection({ initialActivities }: { initialActivitie
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#0A1128] border border-[#1E3A8A]/50 rounded-3xl overflow-hidden shadow-2xl w-full max-w-4xl max-h-[80vh] md:max-h-[85vh] flex flex-col md:flex-row relative mt-8 md:mt-0"
+              className="bg-[#0A1128] border border-[#1E3A8A]/50 rounded-3xl overflow-hidden shadow-2xl w-full max-w-4xl h-[90vh] md:h-[85vh] flex flex-col md:flex-row relative mt-8 md:mt-0"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedActivity(null)}
-                className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-red-500/80 text-white rounded-full backdrop-blur-md transition-colors"
+                className="absolute top-4 right-4 z-10 p-2 bg-red-500/80 hover:bg-red-600/90 text-white rounded-full backdrop-blur-md transition-colors shadow-lg"
               >
                 <IconX size={20} />
               </button>
 
               {/* Left Side: Image */}
-              <div className="w-full md:w-1/2 bg-black flex items-center justify-center relative min-h-75 md:min-h-full">
-                <div className="absolute inset-0 pt-8 pb-2 md:pt-4">
+              <div className="w-full shrink-0 h-2/5 md:h-full md:w-1/2 bg-black flex items-center justify-center relative">
+                <div className="absolute inset-0 pt-10 pb-2 md:pt-4">
                   <Image
                     src={selectedActivity.imageUrl}
                     alt={selectedActivity.title || 'Activity Image'}
@@ -234,7 +234,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
               </div>
 
               {/* Right Side: Content & Comments */}
-              <div className="w-full md:w-1/2 flex flex-col h-[60vh] md:h-[85vh] bg-[#0A1128]">
+              <div className="w-full flex-1 min-h-0 flex flex-col md:w-1/2 bg-[#0A1128]">
                 {/* Header (Date, Title, Description) */}
                 <div className="p-4 md:p-6 border-b border-[#1E3A8A]/30 shrink-0">
                   <div className="flex flex-col gap-1.5">
@@ -326,7 +326,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
                           </button>
                         </div>
                         <span className="text-cyan-300 font-bold text-base font-mono block mb-1">{comment.userName}</span>
-                        <p className="text-slate-300 text-sm font-mono leading-relaxed whitespace-pre-wrap break-words">{comment.content}</p>
+                        <p className="text-slate-300 text-sm font-mono leading-relaxed whitespace-pre-wrap wrap-break-word">{comment.content}</p>
                         <div className="clear-both"></div>
                       </div>
                     ))

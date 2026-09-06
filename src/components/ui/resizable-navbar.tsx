@@ -9,7 +9,8 @@ import {
 } from "motion/react";
 
 import React, { useRef, useState } from "react";
-
+import Link from "next/link";
+import Image from "next/image";
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -120,7 +121,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-base font-medium text-slate-300 transition duration-200 hover:text-white lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-base font-medium font-mono text-slate-300 transition duration-200 hover:text-white lg:flex lg:space-x-2",
         className,
       )}
     >
@@ -156,7 +157,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         width: visible ? "90%" : "100%",
         paddingRight: visible ? "12px" : "0px",
         paddingLeft: visible ? "12px" : "0px",
-        borderRadius: visible ? "4px" : "2rem",
+        borderRadius: "2rem",
         y: visible ? 8 : 0,
       }}
       transition={{
@@ -166,7 +167,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
       }}
       className={cn(
         "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden pointer-events-auto",
-        visible && "bg-[#0A1128]/90 shadow-lg backdrop-blur-md border border-[#1E3A8A]/50",
+        visible && "bg-[#0A1128]/90 shadow-lg backdrop-blur-md border border-[#E8EDF2]/80",
         className,
       )}
     >
@@ -195,7 +196,6 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  onClose,
 }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>
@@ -205,7 +205,7 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-[#0A1128] px-4 py-8 shadow-xl border border-[#1E3A8A] text-slate-200",
+            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-3xl bg-[#0A1128] px-4 py-8 shadow-xl border border-[#E8EDF2]/80 text-slate-200",
             className,
           )}
         >
@@ -232,19 +232,19 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-    <a
+    <Link
       href="/"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-base font-normal text-white"
     >
-      <img
-        src="https://assets.aceternity.com/logo-dark.png"
+      <Image
+        src="/logo.png"
         alt="logo"
-        width={30}
-        height={30}
-        className="invert"
+        width={40}
+        height={40}
+        className="object-contain bg-white rounded-full p-1"
       />
-      <span className="font-medium text-white">RafHrs</span>
-    </a>
+      <span className="font-medium font-mono text-white">RafHrs</span>
+    </Link>
   );
 };
 
@@ -263,7 +263,7 @@ export const NavbarButton = ({
   variant?: "primary" | "secondary" | "dark" | "gradient";
 } & Record<string, unknown>) => {
   const baseStyles =
-    "px-5 py-2 rounded-full text-base font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
+    "px-5 py-2 rounded-full text-base font-bold font-mono relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
   const variantStyles = {
     primary: "bg-cyan-500 text-white shadow-lg hover:bg-cyan-400",
     secondary: "bg-transparent shadow-none dark:text-white",
