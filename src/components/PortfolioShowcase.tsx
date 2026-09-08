@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { IconCode, IconHexagon, IconLayersOff, IconExternalLink, IconX } from '@tabler/icons-react';
+import { IconCode, IconHexagon, IconLayersOff, IconExternalLink, IconX, IconLock } from '@tabler/icons-react';
 
 // Removed static data import: import { projects, certificates, techStack as fallbackTechStack } from '@/data/portfolio';
 import * as Icons from '@/components/ui/icons';
@@ -17,6 +17,9 @@ const iconMap: Record<string, React.ReactNode> = {
   "Tailwind": <Icons.TailwindCSSIcon className="w-8 h-8 mb-2" />,
   "HTML5": <Icons.HTML5Icon className="w-8 h-8 mb-2" />,
   "CSS3": <Icons.CSSIcon className="w-8 h-8 mb-2" />,
+  "Expo": <Icons.ExpoIcon className="w-8 h-8 mb-2" />,
+  "TanStack": <Icons.TanStackIcon className="w-8 h-8 mb-2" />,
+  "Express.js": <Icons.ExpressjsIcon className="w-8 h-8 mb-2" />,
   "Node.js": <Icons.NodejIcon className="w-8 h-8 mb-2" />,
   "Flask": <Icons.FlaskIcon className="w-8 h-8 mb-2" />,
   "Django": <Icons.DjangoIcon className="w-8 h-8 mb-2" />,
@@ -43,9 +46,13 @@ const iconComponentMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> 
   "Tailwind": Icons.TailwindCSSIcon,
   "HTML5": Icons.HTML5Icon,
   "CSS3": Icons.CSSIcon,
+  "Expo Mobile": Icons.ExpoIcon,
+  "TanStack": Icons.TanStackIcon,
+  "Express.js": Icons.ExpressjsIcon,
   "Node.js": Icons.NodejIcon,
   "Flask": Icons.FlaskIcon,
   "Django": Icons.DjangoIcon,
+  "Django Rest Framework": Icons.DjangoIcon,
   "MySQL": Icons.MySQLIcon,
   "Python": Icons.PythonIcon,
   "Drizzle": Icons.DrizzleORMIcon,
@@ -344,24 +351,34 @@ export default function PortfolioShowcase({
 
                 {/* Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 mt-auto">
-                  <a 
-                    href={selectedProject.liveDemo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-white py-3.5 px-6 rounded-xl font-bold transition-colors flex-1 shadow-lg shadow-teal-500/20"
-                  >
-                    <IconExternalLink size={20} />
-                    Live Demo
-                  </a>
-                  <a 
-                    href={selectedProject.sourceCode}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center gap-2 bg-[#1E293B] hover:bg-[#334155] text-white py-3.5 px-6 rounded-xl font-bold transition-colors flex-1 border border-slate-600 shadow-lg"
-                  >
-                    <Icons.GitHubIcon className="w-8" />
-                    Source Code
-                  </a>
+                  {selectedProject.liveDemo && selectedProject.liveDemo.trim() !== "" && (
+                    <a 
+                      href={selectedProject.liveDemo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-white py-3.5 px-6 rounded-xl font-bold transition-colors flex-1 shadow-lg shadow-teal-500/20"
+                    >
+                      <IconExternalLink size={20} />
+                      Live Demo
+                    </a>
+                  )}
+
+                  {selectedProject.sourceCode && selectedProject.sourceCode.trim() !== "" ? (
+                    <a 
+                      href={selectedProject.sourceCode}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-2 bg-[#1E293B] hover:bg-[#334155] text-white py-3.5 px-6 rounded-xl font-bold transition-colors flex-1 border border-slate-600 shadow-lg"
+                    >
+                      <Icons.GitHubIcon className="w-8" />
+                      Source Code
+                    </a>
+                  ) : (
+                    <div className="flex items-center justify-center gap-2 bg-[#0F172A] text-slate-500 py-3.5 px-6 rounded-xl font-bold flex-1 border border-slate-800 cursor-not-allowed" title="Source code is private for this project">
+                      <IconLock size={20} />
+                      Private Repository
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
