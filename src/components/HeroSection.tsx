@@ -25,7 +25,7 @@ export default function HeroSection() {
           {/* Subtitle */}
           <div className="text-4xl md:text-4xl font-mono mb-8 text-[#38BDF8]">
             <TextType
-              text={["Network Engineer", "Data Analyst", "Junior Programming"]}
+              text={["Network Engineer", "Data Analyst", "Software Engineer"]}
               typingSpeed={80}
               pauseDuration={2900}
               showCursor
