@@ -13,7 +13,6 @@
   "dependencies": {
     "@base-ui/react": "^1.4.1",
     "@lottiefiles/dotlottie-react": "^0.19.0",
-    "@neondatabase/serverless": "^1.1.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.0",
     "@react-three/rapier": "^2.2.0",
@@ -25,6 +24,7 @@
     "lucide-react": "^1.8.0",
     "motion": "^12.38.0",
     "next": "16.2.4",
+    "postgres": "^4.1.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "shadcn": "^4.4.0",
