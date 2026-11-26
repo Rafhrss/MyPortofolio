@@ -137,7 +137,7 @@ export default function PortfolioShowcase({
 
   return (
     // max-w-7xl untuk melebarkan showcase
-    <div id="project" className="w-full px-4 md:px-8 py-20 max-w-7xl mx-auto flex flex-col items-center">
+    <div id="project" className="w-full px-4 md:px-8 py-20 max-w-7xl mx-auto flex flex-col items-center font-mono">
       {/* Title */}
       <h2 
       // Tailwind untuk mengatur besar size text

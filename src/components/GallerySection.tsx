@@ -142,7 +142,7 @@ export default function GallerySection({ initialActivities }: { initialActivitie
   };
 
   return (
-    <section id="galery" className="container mx-auto px-4 py-20 relative z-10">
+    <section id="galery" className="container mx-auto px-4 py-20 relative z-10 font-mono">
       <div className="text-center mb-16">
         <h2 
           className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-4 text-[28px] leading-9 sm:text-[36px] sm:leading-10.5 md:text-[46px] md:leading-12.5"

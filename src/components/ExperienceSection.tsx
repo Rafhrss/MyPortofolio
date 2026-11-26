@@ -43,7 +43,7 @@ export default function ExperienceSection({ initialExperiences = [] }: Experienc
   }, [selectedExp]);
 
   return (
-    <div id="experience" className="w-full px-4 md:px-8 py-20 max-w-7xl mx-auto flex flex-col items-center">
+    <div id="experience" className="w-full px-4 md:px-8 py-20 max-w-7xl mx-auto flex flex-col items-center font-mono">
       {/* Title */}
       <h2 
         className="font-moderniz uppercase tracking-wider text-center text-[#00ffdc] drop-shadow-[0_0_15px_rgba(0,255,220,0.8)] mb-16 text-[28px] leading-9 sm:text-[36px] sm:leading-10.5 md:text-[46px] md:leading-12.5"
